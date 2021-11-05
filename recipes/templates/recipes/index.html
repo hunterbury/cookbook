@@ -1,0 +1,16 @@
+{% extends "recipes/layout.html" %}
+ 
+{% block body %}
+    <h1>Recipes</h1>
+
+    <a href="{% url 'recipes:add'%}">Add a Recipe</a>
+
+    <div class="col">
+        {% for recipe in recipes %}
+        <div class="row">
+            {{ recipe }}
+        </div>
+        {% endfor %}
+    </div>
+
+{% endblock %}
