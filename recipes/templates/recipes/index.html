@@ -3,13 +3,20 @@
 {% block body %}
     <h1>Recipes</h1>
 
-    <a href="{% url 'recipes:add'%}">Add a Recipe</a>
+    <a href="{% url 'recipes:add' %}">Add a Recipe</a>
+    <a href="{% url 'recipes:update' %}">Update Recipe</a>
+
 
     <div class="col">
         {% for recipe in recipes %}
-        <div class="row">
-            {{ recipe }}
-        </div>
+        <div class="card" style="width: 18rem;">
+            <img class="card-img-top" src="{{ recipe.image }}" alt="Card image cap">
+            <div class="card-body">
+              <h5 class="card-title">{{ recipe.title }}</h5>
+              <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+              <a href="#" class="btn btn-primary">Go somewhere</a>
+            </div>
+          </div>
         {% endfor %}
     </div>
 

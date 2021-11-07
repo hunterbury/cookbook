@@ -1,0 +1,10 @@
+
+
+<p>Are you sure you want to delete "{{recipe}}"?</p>
+
+<form action="{% url 'recipes:delete' recipe.id %}" method="POST">
+    {% csrf_token %}
+    <a href="{% url 'recipes:index' %}">Cancel</a>
+
+    <input type="submit" name="Confirm">
+</form>
