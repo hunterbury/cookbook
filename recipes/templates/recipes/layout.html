@@ -9,6 +9,36 @@
         </title>
     </head>
     <body>
+        <header>
+            <ul class="nav nav-pills">
+                <li class="nav-item">
+                  <a class="nav-link active" href="#">Home</a>
+                </li>
+                <li class="nav-item dropdown">
+                  <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Recipes</a>
+                  <div class="dropdown-menu">
+                      <!--dropdown inside of dropdown. Recipes > Meal > Breakfast, Lunch, Dinner, Recipes > Cuisine > Mexican, Italian, etc. -->
+                    <a class="dropdown-item" href="#"></a>
+                    <a class="dropdown-item" href="#">Another action</a>
+                    <a class="dropdown-item" href="#">Something else here</a>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item" href="#">Separated link</a>
+                  </div>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="#">Add a Recipe</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="#">About Us</a>
+                </li>
+                <li>
+                    <form class="form">
+                        <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+                        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+                      </form>
+                </li>
+              </ul>
+        </header>
         {% block body %}
         {% endblock %}
     </body>

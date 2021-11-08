@@ -8,6 +8,7 @@ CUISINE_CHOICES = [
 
 class Recipe(models.Model):
     title = models.CharField(max_length=150)
+    image = models.ImageField(default='default.jpg')
     cuisine = models.CharField(max_length=20, choices=CUISINE_CHOICES, default='none')
     info = models.TextField()
     prep_time = models.DurationField()

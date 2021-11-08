@@ -1,0 +1,9 @@
+{% extends "recipes/layout.html" %}
+ 
+{% block body %}
+    <h1>{{ recipe.title }}</h1>
+
+    <a href="{% url 'recipes:update' %}">Update Recipe</a>
+    <a href="{% url 'recipes:delete' %}">Delete Recipe</a>
+
+{% endblock %}

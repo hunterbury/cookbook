@@ -56,3 +56,10 @@ def delete(request, pk):
     return render(request, 'recipes/delete.html', {
         "form": recipe
     })
+
+def view(request, pk):
+    recipe = Recipe.objects.get(id=pk)
+
+    return render(request, 'recipes/view.html', {
+        "recipe": recipe
+    })
