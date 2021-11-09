@@ -6,17 +6,27 @@ from .forms import NewRecipeForm, IngredientFormSet
 from .models import Recipe, Ingredient
 
 def index(request):
-    if "recipes" not in request.session:
-        request.session["recipes"] = []
+    recipes = Recipe.objects.all()
 
     return render(request, "recipes/index.html", {
-        "recipes": Recipe.objects.all()
+        "recipes": recipes,
     })
+
+def search(request):
+    recipes = Recipe.objects.all()
+
+    return render(request, "recipes/index.html", {
+        "recipes": recipes,
+    })
+
+def sort(request):
+    recipes = Recipe.objects.all()
+
 
 def add(request):
     form = NewRecipeForm()
     if request.method == "POST":
-        form = NewRecipeForm(request.POST)
+        form = NewRecipeForm(request.POST, request.FILES)
         if form.is_valid():
             form.save()
             recipe = form.cleaned_data.get("recipe")
@@ -63,3 +73,6 @@ def view(request, pk):
     return render(request, 'recipes/view.html', {
         "recipe": recipe
     })
+
+def about(request):
+    return render(request, 'recipes/about.html', {})

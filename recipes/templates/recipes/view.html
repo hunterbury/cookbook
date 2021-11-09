@@ -2,6 +2,11 @@
  
 {% block body %}
     <h1>{{ recipe.title }}</h1>
+    {% for cuisine in recipe.cuisine %}
+        <span class="card-text">{{ cuisine }}</span>
+    {% endfor %}
+    <img class="card-img-top" src="{{ recipe.image.url }}" alt="Card image cap">
+
 
     <a href="{% url 'recipes:update' %}">Update Recipe</a>
     <a href="{% url 'recipes:delete' %}">Delete Recipe</a>

@@ -5,7 +5,7 @@
 {% block body %}
     <h1>Add a recipe:</h1>
 
-    <form action="{% url 'recipes:add' %}" method="POST">
+    <form action="{% url 'recipes:add' %}" method="POST" enctype="multipart/form-data">
         {% csrf_token %}
         {{ form|crispy }}
         <br>
