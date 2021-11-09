@@ -4,9 +4,15 @@ from django import forms
 from django.urls import reverse
 from .forms import NewRecipeForm, IngredientFormSet
 from .models import Recipe, Ingredient
+from django.db.models import Q
 
 def index(request):
     recipes = Recipe.objects.all()
+    query = request.GET.get('q', None)
+    if query:
+        recipes = recipes.filter(
+            Q(title__icontains=query) | Q(cuisine__icontains=query)
+        )
 
     return render(request, "recipes/index.html", {
         "recipes": recipes,
