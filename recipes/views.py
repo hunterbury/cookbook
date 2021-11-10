@@ -8,6 +8,8 @@ from django.db.models import Q
 
 def index(request):
     recipes = Recipe.objects.all()
+    if "recipes" not in request.session:
+        request.session["recipes"] = []
     query = request.GET.get('q', None)
     if query:
         recipes = recipes.filter(
@@ -31,6 +33,7 @@ def sort(request):
 
 def add(request):
     form = NewRecipeForm()
+    formset = IngredientFormSet()
     if request.method == "POST":
         form = NewRecipeForm(request.POST, request.FILES)
         if form.is_valid():
@@ -40,11 +43,13 @@ def add(request):
             return HttpResponseRedirect(reverse("recipes:index"))
     else:    
         return render(request, "recipes/add.html", {
-            "form": form
+            "form": form,
+            "formset": formset
     })
 
     return render(request, "recipes/add.html", {
-        "form": form
+        "form": form,
+        "formset": formset
     })
 
 def update(request, pk):

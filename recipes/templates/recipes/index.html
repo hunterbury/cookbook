@@ -4,15 +4,15 @@
 {% block body %}
     <h1>Recipes</h1>
     <p>Sort by:</p>
-    <div class="col">
+    <div class="recipes">
         {% for recipe in recipes %}
-        <div class="card" style="width: 18rem;">
-            <img class="card-img-top" src="{{ recipe.image.url }}" alt="Card image cap">
-            <div class="card-body">
-              <h5 class="card-title">{{ recipe.title }}</h5>
-              <span class="card-text">{{ recipe.prep_time }}</span>
-              {% for cuisine in recipe.cuisine %}
-              <span class="card-text">{{ cuisine }}</span>
+        <div class="recipe">
+            <img class="recipe_img" src="{{ recipe.image.url }}" alt="Card image cap">
+            <div class="recipe_details">
+              <h2 class="title">{{ recipe.title }}</h2>
+              <span class="prep_time">{{ recipe.prep_time }}</span>
+              {% for recipe.cuisine in recipe.cuisines %}
+              <span class="cuisine">{{ recipe.cuisine }}</span>
               {% endfor %}
               <a href="{% url 'recipes:view' recipe.id %}" class="btn btn-primary">View Recipe</a>
             </div>

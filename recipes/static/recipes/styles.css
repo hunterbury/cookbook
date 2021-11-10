@@ -1,3 +1,44 @@
-.recipe {
-    border: solid 1px black;
+body {
+    font-family: sens-serif;
+    align-content: center;
+    justify-content: center;
 }
+
+.recipes {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    grid-gap: 20px;
+}
+
+.recipe {
+    height: 200px;
+    width: 400px;
+    padding: 20px;
+    display: grid;
+    grid-template-columns: 150px 1fr;
+    grid-gap: 10px;
+    align-items: center;
+    color: black;
+    font-weight: 100;
+}
+
+.recipe_img {
+    float: left;
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+}
+
+.cuisine {
+    background-color: #ddd;
+    border: none;
+    color: black;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    margin: 4px 2px;
+    border-radius: 16px;
+  }
+
+
