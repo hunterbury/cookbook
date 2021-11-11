@@ -1,10 +1,10 @@
 from django import forms
 from django.forms import formset_factory
-from .models import Ingredient, Recipe
+from .models import Ingredient, Recipe, Instruction
 from recipes.choices import *
 
 
-class NewRecipeForm(forms.ModelForm):
+class RecipeForm(forms.ModelForm):
     class Meta:
         model = Recipe
         fields = '__all__'
@@ -21,4 +21,7 @@ class IngredientForm(forms.ModelForm):
         model = Ingredient 
         exclude = ('recipe',)
 
-IngredientFormSet = forms.inlineformset_factory(Recipe, Ingredient, form=IngredientForm)
+class InstructionForm(forms.ModelForm):
+    class Meta:
+        model = Instruction 
+        exclude = ('recipe',)

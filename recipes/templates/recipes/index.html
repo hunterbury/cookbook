@@ -1,5 +1,8 @@
 {% extends "recipes/layout.html" %}
 {% load static %}
+{% block styles %}
+    <link rel="stylesheet" href="{% static 'recipes/css/index.css' %}">
+{% endblock %}
  
 {% block body %}
     <h1>Recipes</h1>
@@ -11,9 +14,7 @@
             <div class="recipe_details">
               <h2 class="title">{{ recipe.title }}</h2>
               <span class="prep_time">{{ recipe.prep_time }}</span>
-              {% for recipe.cuisine in recipe.cuisines %}
               <span class="cuisine">{{ recipe.cuisine }}</span>
-              {% endfor %}
               <a href="{% url 'recipes:view' recipe.id %}" class="btn btn-primary">View Recipe</a>
             </div>
           </div>
