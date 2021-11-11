@@ -1,21 +1,48 @@
 {% extends "recipes/layout.html" %}
-
-{% load crispy_forms_tags %}
+{% load static %}
+{% block styles %}
+    <link rel="stylesheet" href="{% static 'recipes/css/add.css' %}">
+{% endblock %}
 
 {% block body %}
-    <h1>Add a recipe:</h1>
+    <h1>Add a Recipe</h1>
 
     <form action="{% url 'recipes:add' %}" method="POST" enctype="multipart/form-data">
         {% csrf_token %}
-        {{ form|crispy }}
+        <div class="recipe">
+            <h2>Recipe Details:</h2>
+            <ul>
+                <label for="title">Title:</label>
+                <li id="title">{{ recipeForm.title }}</li><br>
+                <li id="image" class="detail">{{ recipeForm.image }}</li>
+                <li id="cuisine">{{ recipeForm.cuisine }}</li><br>
+                <li id="meal">{{ recipeForm.meal }}</li><br>
+                <li id="info">{{ recipeForm.info }}</li><br>
+                <li id="prep_time">{{ recipeForm.prep_time }}</li><br>
+                <li id="cook_time">{{ recipeForm.cook_time }}</li><br>
+                <li id="servings">{{ recipeForm.servings }}</li><br>
+            </ul>
+        </div>
         <br>
         <br>
-        <h2>Add Ingredients</h2>
-        {{ formset.management_form }}
-        {% for form in formset %}
-        {{ form|crispy }}
-        {% endfor %}
+        <div class="ingredients">
+            <h2>Add Ingredients</h2>
+            <ul class="ingredients">
+                <li>{{ingredientForm.name}}</li>
+                <li>{{ingredientForm.quantity}}</li>
+                <li>{{ingredientForm.measurement}}</li>
+                <button type="submit">Add another</button>
+            </ul>
+        </div>
+
+        <div class="instruction">
+            <h2>Add Instructions</h2>
+            <ol class="instructions">
+                <li>{{instructionForm.instruction}}</li>
+                <button type="submit">Add another</button>
+            </ol>
+        </div>
+
         <input type="submit">
     </form>
-    <a href="{% url 'recipes:index'%}">View Recipes</a>
 {% endblock %}

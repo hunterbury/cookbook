@@ -2,8 +2,8 @@ from django.shortcuts import render, redirect
 from django.http import HttpResponse, HttpResponseRedirect
 from django import forms
 from django.urls import reverse
-from .forms import NewRecipeForm, IngredientFormSet
-from .models import Recipe, Ingredient
+from .forms import RecipeForm, IngredientForm, InstructionForm
+from .models import Recipe, Ingredient, Instruction
 from django.db.models import Q
 
 def index(request):
@@ -20,44 +20,38 @@ def index(request):
         "recipes": recipes,
     })
 
-def search(request):
-    recipes = Recipe.objects.all()
-
-    return render(request, "recipes/index.html", {
-        "recipes": recipes,
-    })
-
-def sort(request):
-    recipes = Recipe.objects.all()
 
 
 def add(request):
-    form = NewRecipeForm()
-    formset = IngredientFormSet()
+    recipeForm = RecipeForm()
+    ingredientForm = IngredientForm()
+    instructionForm = InstructionForm()
     if request.method == "POST":
-        form = NewRecipeForm(request.POST, request.FILES)
-        if form.is_valid():
-            form.save()
-            recipe = form.cleaned_data.get("recipe")
+        recipeForm = RecipeForm(request.POST, request.FILES)
+        if recipeForm.is_valid():
+            recipeForm.save()
+            recipe = recipeForm.cleaned_data.get("recipe")
             request.session["recipes"] += [recipe]
             return HttpResponseRedirect(reverse("recipes:index"))
     else:    
         return render(request, "recipes/add.html", {
-            "form": form,
-            "formset": formset
+            "recipeForm": recipeForm,
+            "ingredientForm": ingredientForm,
+            "instructionForm": instructionForm
     })
 
     return render(request, "recipes/add.html", {
-        "form": form,
-        "formset": formset
+        "recipeForm": recipeForm,
+        "ingredientForm": ingredientForm,
+        "instructionForm": instructionForm
     })
 
 def update(request, pk):
     recipe = Recipe.objects.get(id=pk)
-    form = NewRecipeForm(instance=recipe)
+    recipeForm = RecipeForm(instance=recipe)
 
     if request.method == "POST":
-        form = NewRecipeForm(request.POST, instance=recipe)
+        form = RecipeForm(request.POST, instance=recipe)
         if form.is_valid():
             form.save()
             recipe = form.cleaned_data.get("recipe")

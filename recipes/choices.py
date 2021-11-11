@@ -13,3 +13,10 @@ MEAL_CHOICES = [
     ('Dinner', 'Dinner'),
     ('Snack', 'Snack'),
 ]
+
+MEASUREMENT_CHOICES = [
+    ('Oz', 'Oz'),
+    ('Cup', 'Cup'),
+    ('Tsp', 'Tsp'),
+    ('Tbsp', 'Tbsp'),
+]
