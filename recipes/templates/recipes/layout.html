@@ -10,43 +10,44 @@
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
         <script src="{% static 'js/app.js' %}"></script>   
-        <link rel="stylesheet" href="{% static 'recipes/css/layout.css' %}">
-        {% block styles %}
-        {% endblock %}
+        <link rel="stylesheet" href="{% static 'css/layout.css' %}">
+        {% block styles %}{% endblock %}
         <title>
             Recipes
         </title>
     </head>
     <body>
         <header>
-            <ul class="top-level-menu nav nav-pills">
-                <li class="nav-item">
-                  <a class="nav-link" href="{% url 'recipes:index' %}">Home</a>
+            <ul class="top-level-menu">
+                <li class="top-item">
+                  <a href="{% url 'recipes:index' %}">Home</a>
                 </li>
-                <li class="nav-item dropdown">
-                  <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Recipes</a>
-                  <div class="dropdown-menu">
-                    <a class="dropdown-item" href="#">Meal</a>
-                        <ul class="second-level-menu">
-                          <li><a class="dropdown-item" href="#">Breakfast</a></li>
-                          <li><a class="dropdown-item" href="#">Lunch</a></li>
-                          <li><a class="dropdown-item" href="#">Dinner</a></li>
-                          <li><a class="dropdown-item" href="#">Snack</a></li>
+                <li class="top-item dropdown1">
+                  <a href="#" class="dropbtn">Recipes</a>
+                  <ul class="dropdown-content1 second-level-menu">
+                    <li class="second-item dropdown2">
+                      <a class="dropbtn" href="#">Meal</a>
+                        <ul class="dropdown-content2 third-level-menu">
+                          <li><a class="third-item" href="#">Breakfast</a></li><br>
+                          <li><a class="third-item" href="#">Lunch</a></li><br>
+                          <li><a class="third-item" href="#">Dinner</a></li><br>
+                          <li><a class="third-item" href="#">Snack</a></li><br>
                         </ul>
-                    <a class="dropdown-item" href="#">Cuisine</a>
-                  </div>
+                    </li><br>
+                    <li><a class="second-item" href="#">Cuisine</a></li>
+                  </ul>
                 </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="{% url 'recipes:add' %}">Add a Recipe</a>
+                <li class="top-item">
+                  <a href="{% url 'recipes:add' %}">Add a Recipe</a>
                 </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="{% url 'recipes:about' %}">About Us</a>
+                <li class="top-item">
+                  <a href="{% url 'recipes:about' %}">About Us</a>
                 </li>
                 <li>
-                    <form class="form" action="{% url 'recipes:index' %}" method="GET">
+                    <form class="top-item form" action="{% url 'recipes:index' %}" method="GET">
                         <input class="form-control mr-sm-2" name="q" type="text" placeholder="Search" aria-label="Search">
                         <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-                      </form>
+                    </form>
                 </li>
               </ul>
         </header>
