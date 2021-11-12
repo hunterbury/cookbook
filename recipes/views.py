@@ -28,9 +28,14 @@ def add(request):
     instructionForm = InstructionForm()
     if request.method == "POST":
         recipeForm = RecipeForm(request.POST, request.FILES)
-        if recipeForm.is_valid():
+        if recipeForm.is_valid() and ingredientForm.is_valid() and instructionForm.is_valid():
             recipeForm.save()
+            ingredientForm.save()
+            instructionForm.save()
+
             recipe = recipeForm.cleaned_data.get("recipe")
+            ingredient = ingredientForm.cleaned_data.get("ingredient")
+            instruction = instructionForm.cleaned_data.get("instruction")
             request.session["recipes"] += [recipe]
             return HttpResponseRedirect(reverse("recipes:index"))
     else:    
