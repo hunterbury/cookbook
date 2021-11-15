@@ -25,3 +25,5 @@ class InstructionForm(forms.ModelForm):
     class Meta:
         model = Instruction 
         exclude = ('recipe',)
+
+RecipeFormSet = formset_factory(RecipeForm, extra=1)

@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect
 from django.http import HttpResponse, HttpResponseRedirect
 from django import forms
 from django.urls import reverse
-from .forms import RecipeForm, IngredientForm, InstructionForm
+from .forms import RecipeForm, IngredientForm, InstructionForm, RecipeFormSet
 from .models import Recipe, Ingredient, Instruction
 from django.db.models import Q
 
@@ -23,32 +23,23 @@ def index(request):
 
 
 def add(request):
-    recipeForm = RecipeForm()
-    ingredientForm = IngredientForm()
-    instructionForm = InstructionForm()
+    formset = RecipeFormSet()
     if request.method == "POST":
-        recipeForm = RecipeForm(request.POST, request.FILES)
-        if recipeForm.is_valid() and ingredientForm.is_valid() and instructionForm.is_valid():
-            recipeForm.save()
-            ingredientForm.save()
-            instructionForm.save()
+        formset = RecipeFormSet(request.POST, request.FILES)
+        if formset.is_valid():
+            formset.save()
 
-            recipe = recipeForm.cleaned_data.get("recipe")
-            ingredient = ingredientForm.cleaned_data.get("ingredient")
-            instruction = instructionForm.cleaned_data.get("instruction")
+            recipe = formset.cleaned_data.get("recipe")
             request.session["recipes"] += [recipe]
             return HttpResponseRedirect(reverse("recipes:index"))
     else:    
         return render(request, "recipes/add.html", {
-            "recipeForm": recipeForm,
-            "ingredientForm": ingredientForm,
-            "instructionForm": instructionForm
+            "formset": formset,
     })
 
     return render(request, "recipes/add.html", {
-        "recipeForm": recipeForm,
-        "ingredientForm": ingredientForm,
-        "instructionForm": instructionForm
+        "formset": formset,
+
     })
 
 def update(request, pk):
