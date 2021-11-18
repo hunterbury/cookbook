@@ -7,6 +7,12 @@
     {% endfor %}
     <img class="card-img-top" src="{{ recipe.image.url }}" alt="Card image cap">
 
+    <ul>
+    {% for ingredient in recipe.ingredients.all %}
+        <li>{{ ingredient.name }}</li>
+    {% endfor %}
+    </ul>
+
 
     <a href="{% url 'recipes:update' %}">Update Recipe</a>
     <a href="{% url 'recipes:delete' %}">Delete Recipe</a>

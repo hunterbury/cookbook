@@ -1,5 +1,5 @@
 from django import forms
-from django.forms import formset_factory
+from django.forms import modelformset_factory
 from .models import Ingredient, Recipe, Instruction
 from recipes.choices import *
 
@@ -26,4 +26,5 @@ class InstructionForm(forms.ModelForm):
         model = Instruction 
         exclude = ('recipe',)
 
-RecipeFormSet = formset_factory(RecipeForm, extra=1)
+IngredientFormSet = modelformset_factory(Ingredient, form=IngredientForm, extra=2)
+InstructionFormSet = modelformset_factory(Instruction, form=InstructionForm, extra=2)
