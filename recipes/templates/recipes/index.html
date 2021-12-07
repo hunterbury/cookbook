@@ -10,6 +10,14 @@
     <div class="recipes">
         {% for recipe in recipes %}
         <div class="recipe">
+        <img class="recipe__img" src="{{ recipe.image.url }}" />
+        <h2 class="recipe_title">{{ recipe.title }}</h2>
+        <div class="grid__overlay">
+          <button class="viewbutton" href="{% url 'recipes:view' recipe.id %}">View Recipe</button>
+        </div>
+      </div>
+
+        {% comment %} <div class="recipe">
             <img class="recipe_img" src="{{ recipe.image.url }}" alt="Card image cap">
             <div class="recipe_details">
               <h2 class="title">{{ recipe.title }}</h2>
@@ -17,7 +25,7 @@
               <span class="cuisine">{{ recipe.cuisine }}</span>
               <a href="{% url 'recipes:view' recipe.id %}" class="btn btn-primary">View Recipe</a>
             </div>
-          </div>
+          </div> {% endcomment %}
         {% endfor %}
     </div>
 
