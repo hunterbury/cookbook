@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect
 from django.http import HttpResponse, HttpResponseRedirect
 from django import forms
 from django.urls import reverse
-from .forms import RecipeForm, IngredientFormSet, InstructionFormSet
+from .forms import RecipeForm
 from .models import Recipe
 from django.db.models import Q
 
@@ -24,13 +24,9 @@ def index(request):
 
 def add(request):
     form = RecipeForm()
-    ingredient_formset = IngredientFormSet()
-    instruction_formset = InstructionFormSet()
 
     if request.method == "POST":
         form = RecipeForm(request.POST, request.FILES)
-        ingredient_formset = IngredientFormSet(request.POST, request.FILES, prefix="ingredient")
-        instruction_formset = InstructionFormSet(request.POST, request.FILES, prefix="instruction")
 
         if form.is_valid():
             recipe = form.save()
@@ -40,14 +36,10 @@ def add(request):
     else:    
         return render(request, "recipes/add.html", {
             "form": form,
-            "ingredient_formset": ingredient_formset,
-            "instruction_formset": instruction_formset,
     })
 
     return render(request, "recipes/add.html", {
         "form": form,
-        "ingredient_formset": ingredient_formset,
-        "instruction_formset": instruction_formset,
     })
 
 def update(request, pk):
