@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect
 from django.http import HttpResponse, HttpResponseRedirect
 from django import forms
 from django.urls import reverse
-from .forms import RecipeForm
+from .forms import IngredientFormSet, InstructionFormSet, RecipeForm
 from .models import Recipe
 from django.db.models import Q
 
@@ -23,20 +23,33 @@ def index(request):
 
 
 def add(request):
-    form = RecipeForm()
+    if request.method == "GET":
+        form = RecipeForm()
+        ingredient_formset = IngredientFormSet()
+        instruction_formset = InstructionFormSet()
+        return render(request, "recipes/add.html", {
+            "form":form,
+            "ingredient_formset":ingredient_formset,
+            "instruction_formset": instruction_formset
+        })
 
-    if request.method == "POST":
+    elif request.method == "POST":
         form = RecipeForm(request.POST, request.FILES)
 
         if form.is_valid():
             recipe = form.save()
-            recipe = form.cleaned_data.get("recipe")
+            # recipe = form.cleaned_data.get("recipe")
+            ingredient_formset = IngredientFormSet(request.POST, instance=recipe)
+            instruction_formset = InstructionFormSet(request.POST, instance=recipe)
+            if ingredient_formset.is_valid() and instruction_formset.is_valid():
+                ingredient_formset.save() and instruction_formset.save()
+
             request.session["recipes"] += [recipe]
             return HttpResponseRedirect(reverse("recipes:index"))
-    else:    
-        return render(request, "recipes/add.html", {
-            "form": form,
-    })
+        else:    
+            return render(request, "recipes/add.html", {
+                "form": form,
+        })
 
     return render(request, "recipes/add.html", {
         "form": form,
@@ -68,7 +81,7 @@ def delete(request, pk):
         "form": recipe
     })
 
-def view(request, pk):
+def view_recipe(request, pk):
     recipe = Recipe.objects.get(id=pk)
 
     return render(request, 'recipes/view.html', {
