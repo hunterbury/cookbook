@@ -1,111 +1,104 @@
-* {
-  -webkit-box-sizing: boder-box;
-          box-sizing: boder-box;
+@import url(https://fonts.googleapis.com/css?family=Montserrat:500);
+nav {
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+}
+
+:root {
+  /* Base font size */
+  font-size: 10px;
+}
+
+*,
+*::before,
+*::after {
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
 }
 
 body {
-  margin: 0;
+  min-height: 100vh;
+  background-color: #fafafa;
 }
 
-#main {
-  position: relative;
-  z-index: 20;
-  background: #fff;
-  -webkit-transition: -webkit-transform .6s ease;
-  transition: -webkit-transform .6s ease;
-  transition: transform .6s ease;
-  transition: transform .6s ease, -webkit-transform .6s ease;
+.container {
+  max-width: 100rem;
+  margin: 0 auto;
+  padding: 0 2rem 2rem;
 }
 
-@media (min-width: 640px) {
-  #main {
-    padding: 1em;
-  }
+.heading {
+  font-family: "Montserrat", Arial, sans-serif;
+  font-size: 4rem;
+  font-weight: 500;
+  line-height: 1.5;
+  text-align: center;
+  padding: 3.5rem 0;
+  color: #1a1a1a;
 }
 
-.fake-section {
-  background: #eee;
-  height: 300px;
+.heading span {
+  display: block;
 }
 
-.tiles-a {
-  width: 100%;
-  position: relative;
+.gallery {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  /* Compensate for excess margin on outer gallery flex items */
+  margin: -1rem -1rem;
+}
+
+.gallery-item {
+  /* Minimum width of 24rem and grow to fit available space */
+  -webkit-box-flex: 1;
+      -ms-flex: 1 0 24rem;
+          flex: 1 0 24rem;
+  /* Margin value should be half of grid-gap value as margins on flex items don't collapse */
+  margin: 1rem;
+  -webkit-box-shadow: 0.3rem 0.4rem 0.4rem rgba(0, 0, 0, 0.4);
+          box-shadow: 0.3rem 0.4rem 0.4rem rgba(0, 0, 0, 0.4);
   overflow: hidden;
 }
 
-.tiles-a ul {
-  margin: 0;
-  padding: 0;
-}
-
-.tiles-a li {
-  list-style: none;
-}
-
-@media (min-width: 640px) {
-  .tiles-a li {
-    float: left;
-    width: 33.33%;
-  }
-}
-
-.tiles-a a {
-  margin: 1em;
+.gallery-image {
   display: block;
-  background: #222;
-  padding-top: 73%;
-  height: 0;
-}
-
-#aside {
-  position: fixed;
-  top: 0;
-  right: 0;
-  width: 60%;
+  width: 100%;
   height: 100%;
-  background: #eee;
-  overflow-y: scroll;
-  z-index: 10;
+  -o-object-fit: cover;
+     object-fit: cover;
+  -webkit-transition: -webkit-transform 400ms ease-out;
+  transition: -webkit-transform 400ms ease-out;
+  transition: transform 400ms ease-out;
+  transition: transform 400ms ease-out, -webkit-transform 400ms ease-out;
 }
 
-#aside img {
-  width: 100%;
-  height: auto;
-  vertical-align: top;
+.gallery-image:hover {
+  -webkit-transform: scale(1.15);
+          transform: scale(1.15);
 }
 
-#aside .wrapper {
-  padding: 1em;
-}
+/*
 
-#aside .close {
-  width: 25px;
-  display: block;
-  position: absolute;
-  top: 1em;
-  right: 1em;
-  background-color: rgba(0, 0, 0, 0.5);
-  border-radius: 50%;
-}
+The following rule will only run if your browser supports CSS grid.
 
-.show-detail {
-  overflow: hidden;
-}
+Remove or comment-out the code block below to see how the browser will fall-back to flexbox styling. 
 
-.show-detail #main {
-  -webkit-transform: translateX(-60%);
-          transform: translateX(-60%);
-}
-
-.visually-hidden {
-  position: absolute;
-  overflow: hidden;
-  clip: rect(0 0 0 0);
-  height: 1px;
-  width: 1px;
-  margin: -1px;
-  padding: 0;
-  border: 0;
+*/
+@supports (display: grid) {
+  .gallery {
+    display: -ms-grid;
+    display: grid;
+    -ms-grid-columns: (minmax(24rem, 1fr))[auto-fit];
+        grid-template-columns: repeat(auto-fit, minmax(24rem, 1fr));
+    grid-gap: 2rem;
+  }
+  .gallery,
+  .gallery-item {
+    margin: 0;
+  }
 }
 /*# sourceMappingURL=index.css.map */

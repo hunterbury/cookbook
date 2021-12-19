@@ -3,7 +3,7 @@ from recipes.choices import *
 
 class Recipe(models.Model):        
     title = models.CharField(max_length=150)
-    image = models.ImageField(null=True, blank=True, upload_to="images/", default="images/default.jpg")
+    image = models.URLField(null=True, blank=True, default="images/default.jpg")
     cuisine = models.CharField(null=True, blank=True, max_length=20, choices=CUISINE_CHOICES, default='None')
     meal = models.CharField(null=True, blank=True, max_length=20, choices=MEAL_CHOICES, default='None')
     info = models.CharField(max_length=500)

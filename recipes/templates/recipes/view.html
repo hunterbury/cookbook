@@ -13,6 +13,12 @@
     {% endfor %}
     </ul>
 
+    <ol>
+        {% for instruction in recipe.instructions.all %}
+            <li>{{ instruction.instruction }}</li>
+        {% endfor %}
+    </ol>
+    
 
     <a href="{% url 'recipes:update' %}">Update Recipe</a>
     <a href="{% url 'recipes:delete' %}">Delete Recipe</a>

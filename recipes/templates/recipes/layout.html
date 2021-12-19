@@ -19,39 +19,49 @@
     </head>
     <body>
         <header>
-            <ul class="top-level-menu">
-                <li class="top-item">
-                  <a href="{% url 'recipes:index' %}">Home</a>
+          <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+            <a class="navbar-brand" href="{% url 'recipes:index' %}">Diners, Drive-Ins, and < divs ></a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+            </button>
+          
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+              <ul class="navbar-nav mr-auto">
+                <li class="nav-item active">
+                  <a class="nav-link" href="{% url 'recipes:index' %}">Home</a>
                 </li>
-                <li class="top-item dropdown1">
-                  <a href="#" class="dropbtn">Recipes</a>
-                  <ul class="dropdown-content1 second-level-menu">
-                    <li class="second-item dropdown2">
-                      <a class="dropbtn" href="#">Meal</a>
-                        <ul class="dropdown-content2 third-level-menu">
-                          <li><a class="third-item" href="#">Breakfast</a></li><br>
-                          <li><a class="third-item" href="#">Lunch</a></li><br>
-                          <li><a class="third-item" href="#">Dinner</a></li><br>
-                          <li><a class="third-item" href="#">Snack</a></li><br>
-                        </ul>
-                    </li><br>
-                    <li><a class="second-item" href="#">Cuisine</a></li>
-                  </ul>
+                <li class="nav-item dropdown">
+                  <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Meal
+                  </a>
+                  <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <a class="dropdown-item" href="#">Breakfast</a>
+                    <a class="dropdown-item" href="#">Lunch</a>
+                    <a class="dropdown-item" href="#">Dinner</a>
+                    <a class="dropdown-item" href="#">Snack</a>
+                  </div>
                 </li>
-                <li class="top-item">
-                  <a href="{% url 'recipes:add' %}">Add a Recipe</a>
+                <li class="nav-item dropdown">
+                  <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Cuisine
+                  </a>
+                  <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <a class="dropdown-item" href="#">Asian</a>
+                    <a class="dropdown-item" href="#">Mexican</a>
+                    <a class="dropdown-item" href="#">American</a>
+                    <a class="dropdown-item" href="#">Indian</a>
+                  </div>
                 </li>
-                <li class="top-item">
-                  <a href="{% url 'recipes:about' %}">About Us</a>
-                </li>
-                <li>
-                    <form class="top-item form" action="{% url 'recipes:index' %}" method="GET">
-                        <input class="form-control mr-sm-2" name="q" type="text" placeholder="Search" aria-label="Search">
-                        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-                    </form>
+                <li class="nav-item">
+                  <a class="nav-link" href="#">About</a>
                 </li>
               </ul>
-        </header>
+              <form class="form-inline my-2 my-lg-0">
+                <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+              </form>
+            </div>
+          </nav>
         {% block body %}
         {% endblock %}
     </body>

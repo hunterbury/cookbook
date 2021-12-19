@@ -5,10 +5,15 @@
   <h1>Recipes</h1>
   <p>Sort by:</p>
       <div class="container">
-        {% for recipe in recipes %}
-          <a href="{% url 'recipes:view_recipe' pk=recipe.id %}">
-              <img src="{{recipe.image}}" alt="{{recipe.title}}">
-          </a>
-        {% endfor %}     
+        <div class="gallery">
+          {% for recipe in recipes %}
+          <div class="gallery-item">
+            <a href="{% url 'recipes:view_recipe' pk=recipe.id %}">
+              <img class="gallery-image" src="{{recipe.image}}" alt="{{recipe.title}}">
+            </a>
+          </div>
+          {% endfor %}     
+        </div>
       </div>
 {% endblock %}
+
