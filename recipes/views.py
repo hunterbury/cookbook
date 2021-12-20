@@ -6,6 +6,13 @@ from .forms import IngredientFormSet, InstructionFormSet, RecipeForm
 from .models import Recipe
 from .filters import RecipeFilter
 from django.db.models import Q
+from rest_framework import viewsets
+from .serializers import RecipeSerializer
+
+
+class RecipeViewSet(viewsets.ModelViewSet):
+    queryset = Recipe.objects.all().order_by('title')
+    serializer_class = RecipeSerializer
 
 def index(request):
     recipes = Recipe.objects.all()
