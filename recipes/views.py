@@ -4,20 +4,20 @@ from django import forms
 from django.urls import reverse
 from .forms import IngredientFormSet, InstructionFormSet, RecipeForm
 from .models import Recipe
+from .filters import RecipeFilter
 from django.db.models import Q
 
 def index(request):
     recipes = Recipe.objects.all()
     if "recipes" not in request.session:
         request.session["recipes"] = []
-    query = request.GET.get('q', None)
-    if query:
-        recipes = recipes.filter(
-            Q(title__icontains=query) | Q(cuisine__icontains=query)
-        )
+
+    filter = RecipeFilter(request.GET, queryset=Recipe.objects.all())
+    recipes = filter.qs
 
     return render(request, "recipes/index.html", {
         "recipes": recipes,
+        "filter": filter
     })
 
 

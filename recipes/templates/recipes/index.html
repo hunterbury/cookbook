@@ -3,7 +3,19 @@
  
 {% block body %}
   <h1>Recipes</h1>
-  <p>Sort by:</p>
+  <div class="form-wrapper">
+    <h4>Sort By:</h4>
+    <form action="{% url 'recipes:index' %}" method="GET">
+        <h5>Cuisine:</h5>
+        <div class="form-group">
+        {{ filter.form.cuisine }}
+        </div>
+        <h5>Meal:</h5>
+        {{ filter.form.meal }}
+        <input class="btn btn-primary" type="submit" value="Sort" />
+    </form>
+  </div>
+
       <div class="container">
         <div class="gallery">
           {% for recipe in recipes %}
