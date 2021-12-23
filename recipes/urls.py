@@ -12,12 +12,12 @@ urlpatterns = [
     path('api-auth/', include('rest_framework.urls', namespace='rest_framework'))
 ]
 
-# app_name = "recipes"
-# urlpatterns = [
-#     path("", views.index, name="index"),
-#     path("add/", views.add, name="add"),
-#     path("update/", views.update, name="update"),
-#     path("delete/", views.delete, name="delete"),
-#     path("view_recipe/<str:pk>", views.view_recipe, name="view_recipe"),
-#     path("about/", views.about, name="about"),
-# ]
+app_name = "recipes"
+urlpatterns = [
+    path("", views.index, name="index"),
+    path("add/", views.add, name="add"),
+    path("update/<str:pk>", views.update, name="update"),
+    path("delete/<str:pk>", views.delete, name="delete"),
+    path("view_recipe/<str:pk>", views.view_recipe, name="view_recipe"),
+    path("about/", views.about, name="about"),
+]

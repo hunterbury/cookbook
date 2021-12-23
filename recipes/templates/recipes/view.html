@@ -20,7 +20,7 @@
     </ol>
     
 
-    <a href="{% url 'recipes:update' %}">Update Recipe</a>
-    <a href="{% url 'recipes:delete' %}">Delete Recipe</a>
+    <a href="{% url 'recipes:update' pk=recipe.id %}">Update Recipe</a>
+    <a href="{% url 'recipes:delete' pk=recipe.id %}">Delete Recipe</a>
 
 {% endblock %}

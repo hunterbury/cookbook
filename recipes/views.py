@@ -1,3 +1,4 @@
+from django.http.response import JsonResponse
 from django.shortcuts import render, redirect
 from django.http import HttpResponse, HttpResponseRedirect
 from django import forms
@@ -52,7 +53,7 @@ def add(request):
                 ingredient_formset.save() and instruction_formset.save()
 
             request.session["recipes"] += [recipe]
-            return HttpResponseRedirect(reverse("recipes:index"))
+            return JsonResponse(reverse("recipes:index"), safe=False)
         else:    
             return render(request, "recipes/add.html", {
                 "form": form,
