@@ -2,10 +2,9 @@
  
 {% block body %}
     <h1>{{ recipe.title }}</h1>
-    {% for cuisine in recipe.cuisine %}
-        <span class="card-text">{{ cuisine }}</span>
-    {% endfor %}
-    <img class="card-img-top" src="{{ recipe.image.url }}" alt="Card image cap">
+    <span class="card-text">{{ recipe.cuisine }}</span>
+    <span class="card-text">{{ recipe.meal }}</span>
+    <img class="card-img-top" src="{{ recipe.image }}" style="width: 20em; height: 20em;" alt="Card image cap">
 
     <ul>
     {% for ingredient in recipe.ingredients.all %}

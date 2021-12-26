@@ -2,6 +2,7 @@
 {% load static %}
  
 {% block body %}
+<div class="container">
   <h1>Recipes</h1>
   <div class="form-wrapper">
     <h4>Sort By:</h4>
@@ -16,16 +17,15 @@
     </form>
   </div>
 
-      <div class="container">
-        <div class="gallery">
-          {% for recipe in recipes %}
-          <div class="gallery-item">
-            <a href="{% url 'recipes:view_recipe' pk=recipe.id %}">
-              <img class="gallery-image" src="{{recipe.image}}" alt="{{recipe.title}}">
-            </a>
-          </div>
-          {% endfor %}     
-        </div>
-      </div>
+  <div class="gallery">
+    {% for recipe in recipes %}
+    <div class="gallery-item">
+      <a href="{% url 'recipes:view_recipe' pk=recipe.id %}">
+        <img class="gallery-image" src="{{recipe.image}}" alt="{{recipe.title}}">
+      </a>
+    </div>
+    {% endfor %}     
+  </div>
+</div>
 {% endblock %}
 
