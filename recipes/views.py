@@ -60,7 +60,6 @@ def add(request):
         })
 
     return render(request, "recipes/add.html", {
-        "form": form,
     })
 
 def update(request, pk):
