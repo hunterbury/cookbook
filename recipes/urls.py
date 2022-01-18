@@ -18,6 +18,9 @@ urlpatterns = [
     path("add/", views.add, name="add"),
     path("update/<str:pk>", views.update, name="update"),
     path("delete/<str:pk>", views.delete, name="delete"),
-    path("view_recipe/<str:pk>", views.view_recipe, name="view_recipe"),
+    path("view_recipe/<str:pk>", views.view_recipe, name="view-recipe"),
     path("about/", views.about, name="about"),
+    path('', include('django.contrib.auth.urls')),
+    path('login/', views.loginView, name="login"),
+    path('demo-login/', views.demoLogin, name="demo-login"),
 ]

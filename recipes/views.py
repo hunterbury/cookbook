@@ -3,57 +3,82 @@ from django.shortcuts import render, redirect
 from django.http import HttpResponse, HttpResponseRedirect
 from django import forms
 from django.urls import reverse
-from .forms import IngredientFormSet, InstructionFormSet, RecipeForm
+from .forms import RecipeForm
 from .models import Recipe
 from .filters import RecipeFilter
 from django.db.models import Q
 from rest_framework import viewsets
 from .serializers import RecipeSerializer
+from django.contrib.auth import login, authenticate
+from django.contrib.auth.forms import AuthenticationForm
 
 
 class RecipeViewSet(viewsets.ModelViewSet):
-    queryset = Recipe.objects.all().order_by('title')
+    queryset = Recipe.objects.all().order_by('date')
     serializer_class = RecipeSerializer
 
 def index(request):
-    recipes = Recipe.objects.all()
+    recipes = Recipe.objects.all().order_by('date')
     if "recipes" not in request.session:
         request.session["recipes"] = []
 
     filter = RecipeFilter(request.GET, queryset=Recipe.objects.all())
     recipes = filter.qs
 
+    # recipes = Recipe.objects.all().order_by('-date')
+
+
     return render(request, "recipes/index.html", {
         "recipes": recipes,
         "filter": filter
     })
 
+def loginView(request):
+    if request.method == 'POST':
+        username = request.POST['username']
+        password = request.POST['password']
+        user = authenticate(request, username=username, password=password)
+        if user is not None:
+            login(request, user)
+            return redirect('/')
+    else:
+        form = AuthenticationForm()
+    return render(request, 'registration/login.html', {'form': form})
 
+def demoLogin(request):
+    if request.method == 'POST':
+        username = 'demo_user'
+        password = 'demo_password'
+        user = authenticate(request, username=username, password=password)
+        login(request, user)
+        return redirect('/')
 
 def add(request):
     if request.method == "GET":
         form = RecipeForm()
-        ingredient_formset = IngredientFormSet()
-        instruction_formset = InstructionFormSet()
+        # ingredient_formset = IngredientFormSet()
+        # instruction_formset = InstructionFormSet()
         return render(request, "recipes/add.html", {
             "form":form,
-            "ingredient_formset":ingredient_formset,
-            "instruction_formset": instruction_formset
+            # "ingredient_formset":ingredient_formset,
+            # "instruction_formset": instruction_formset
         })
 
     elif request.method == "POST":
         form = RecipeForm(request.POST, request.FILES)
 
         if form.is_valid():
-            recipe = form.save()
+            form.save()
+            recipe = form.cleaned_data.get("recipe")
             # recipe = form.cleaned_data.get("recipe")
-            ingredient_formset = IngredientFormSet(request.POST, instance=recipe)
-            instruction_formset = InstructionFormSet(request.POST, instance=recipe)
-            if ingredient_formset.is_valid() and instruction_formset.is_valid():
-                ingredient_formset.save() and instruction_formset.save()
+            # ingredient_formset = IngredientFormSet(request.POST, instance=recipe)
+            # instruction_formset = InstructionFormSet(request.POST, instance=recipe)
+            # if ingredient_formset.is_valid() and instruction_formset.is_valid():
+            #     ingredient_formset.save() and instruction_formset.save()
 
             request.session["recipes"] += [recipe]
-            return JsonResponse(reverse("recipes:index"), safe=False)
+            return redirect('/')
+
         else:    
             return render(request, "recipes/add.html", {
                 "form": form,

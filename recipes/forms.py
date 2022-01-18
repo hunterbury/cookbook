@@ -1,6 +1,6 @@
 from django import forms
 from django.forms import modelformset_factory
-from .models import Recipe, Ingredient, Instruction
+from .models import Recipe
 from recipes.choices import *
 
 
@@ -16,16 +16,16 @@ class RecipeForm(forms.ModelForm):
             raise forms.ValidationError("The number of servings must be greater than zero.")
         return value
 
-class IngredientForm(forms.ModelForm):
-    class Meta:
-        model = Ingredient
-        exclude = ('recipe',)
+# class IngredientForm(forms.ModelForm):
+#     class Meta:
+#         model = Ingredient
+#         exclude = ('recipe',)
 
-IngredientFormSet = forms.inlineformset_factory(Recipe, Ingredient, form=IngredientForm)
+# IngredientFormSet = forms.inlineformset_factory(Recipe, Ingredient, form=IngredientForm)
 
-class InstructionForm(forms.ModelForm):
-    class Meta:
-        model = Instruction
-        exclude = ('recipe',)
+# class InstructionForm(forms.ModelForm):
+#     class Meta:
+#         model = Instruction
+#         exclude = ('recipe',)
 
-InstructionFormSet = forms.inlineformset_factory(Recipe, Instruction, form=InstructionForm)
+# InstructionFormSet = forms.inlineformset_factory(Recipe, Instruction, form=InstructionForm)
