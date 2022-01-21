@@ -1,6 +1,6 @@
 from django import forms
 from django.forms import modelformset_factory
-from .models import Recipe
+from .models import Recipe, Comment
 from recipes.choices import *
 
 
@@ -15,6 +15,11 @@ class RecipeForm(forms.ModelForm):
         if value < 1:
             raise forms.ValidationError("The number of servings must be greater than zero.")
         return value
+
+class CommentForm(forms.ModelForm):
+    class Meta:
+        model = Comment
+        fields = ('name', 'email', 'body')
 
 # class IngredientForm(forms.ModelForm):
 #     class Meta:

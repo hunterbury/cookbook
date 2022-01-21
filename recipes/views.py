@@ -3,8 +3,8 @@ from django.shortcuts import render, redirect
 from django.http import HttpResponse, HttpResponseRedirect
 from django import forms
 from django.urls import reverse
-from .forms import RecipeForm
-from .models import Recipe
+from .forms import RecipeForm, CommentForm
+from .models import Recipe, Comment
 from .filters import RecipeFilter
 from django.db.models import Q
 from rest_framework import viewsets
@@ -54,12 +54,15 @@ def demoLogin(request):
         return redirect('/')
 
 def add(request):
+    filter = RecipeFilter(request.GET, queryset=Recipe.objects.all())
+
     if request.method == "GET":
         form = RecipeForm()
         # ingredient_formset = IngredientFormSet()
         # instruction_formset = InstructionFormSet()
         return render(request, "recipes/add.html", {
             "form":form,
+            "filter": filter
             # "ingredient_formset":ingredient_formset,
             # "instruction_formset": instruction_formset
         })
@@ -85,9 +88,11 @@ def add(request):
         })
 
     return render(request, "recipes/add.html", {
+        "filter": filter
     })
 
 def update(request, pk):
+    filter = RecipeFilter(request.GET, queryset=Recipe.objects.all())
     recipe = Recipe.objects.get(id=pk)
     recipeForm = RecipeForm(instance=recipe)
 
@@ -100,25 +105,47 @@ def update(request, pk):
             return redirect('/')
 
     return render(request, "recipes/add.html", {
-        "form": form
+        "form": form,
+        "filter": filter
     })
 
 def delete(request, pk):
+    filter = RecipeFilter(request.GET, queryset=Recipe.objects.all())
     recipe = Recipe.objects.get(id=pk)
     if request.method == "POST":
         recipe.delete()
         return redirect('/')
 
     return render(request, 'recipes/delete.html', {
-        "form": recipe
+        "form": recipe,
+        "filter": filter
     })
 
-def view_recipe(request, pk):
+def viewRecipe(request, pk):
+    filter = RecipeFilter(request.GET, queryset=Recipe.objects.all())
     recipe = Recipe.objects.get(id=pk)
 
-    return render(request, 'recipes/view.html', {
-        "recipe": recipe
-    })
+    comments = recipe.comments.filter(active=True)
 
-def about(request):
-    return render(request, 'recipes/about.html', {})
+    new_comment = None
+
+    if request.method == 'POST':
+        # A comment was posted
+        comment_form = CommentForm(data=request.POST)
+        if comment_form.is_valid():
+            # Create Comment object but don't save to database yet          
+            new_comment = comment_form.save(commit=False)
+            # Assign the current post to the comment
+            new_comment.recipe = recipe
+            # Save the comment to the database
+            new_comment.save()
+    else:
+        comment_form = CommentForm() 
+
+    return render(request, 'recipes/view.html', {
+        "recipe": recipe,
+        "filter": filter,
+        'comments': comments,
+        'new_comment': new_comment,
+        'comment_form': comment_form
+    })

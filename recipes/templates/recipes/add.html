@@ -1,35 +1,51 @@
 {% extends "recipes/layout.html" %}
 {% load static %}
+{% load crispy_forms_tags %}
+
 
 {% block body %}
-{% load crispy_forms_tags %}
     <h1>Add a Recipe</h1>
 
     <form action="{% url 'recipes:add' %}" method="POST" enctype="multipart/form-data">
         {% csrf_token %}
-        {% comment %} {{ form|crispy }} {% endcomment %}
-        <table>
+        <div class="form-row">
+            <div class="form-group col-md-6 mb-0">
+              {{ form.title|as_crispy_field }}
+            </div>
+            <div class="form-group col-md-6 mb-0">
+              {{ form.image|as_crispy_field }}
+            </div>
+          </div>
+        <div class="form-row">
+            <div class="form-group col-md-6 mb-0">
+              {{ form.cuisine|as_crispy_field }}
+            </div>
+            <div class="form-group col-md-6 mb-0">
+              {{ form.meal|as_crispy_field }}
+            </div>
+        </div>
+        {{ form.description|as_crispy_field }}
+        <div class="form-row">
+            <div class="form-group col-md-4 mb-0">
+              {{ form.prep_time|as_crispy_field }}
+            </div>
+            <div class="form-group col-md-4 mb-0">
+              {{ form.cook_time|as_crispy_field }}
+            </div>
+            <div class="form-group col-md-4 mb-0">
+                {{ form.servings|as_crispy_field }}
+            </div>
+        </div>
+        {{ form.ingredients|as_crispy_field }}
+        {{ form.instructions|as_crispy_field }}
+
+        {% comment %} <table>
             {% for field in form %}
                 {% if field != "date" %}
                 <tr><td>{{ field }}</td></tr>
                 {% endif %}
             {% endfor %}
-            </table>
-        <button type="submit">Submit</button>
+            </table> {% endcomment %}
+        <button type="submit" class="btn btn-primary">Submit</button>
     </form>
-    {% comment %} <br>
-    <br>
-    <h2>Add Ingredients</h2>
-    {{ ingredient_formset.management_form }}
-    {% for form in ingredient_formset %}
-    {{ form|crispy }}
-    {% endfor %}
-
-    <h2>Add Instructions</h2>
-    {{ instruction_formset.management_form }}
-    {% for form in instruction_formset %}
-    {{ form|crispy }}
-    {% endfor %}
-    <button type="submit">Submit</button>
-    </form> {% endcomment %}
 {% endblock %}

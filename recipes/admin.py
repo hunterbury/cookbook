@@ -1,13 +1,11 @@
 from django.contrib import admin
-from .models import Recipe
-
-# class IngredientInline(admin.TabularInline):
-#     model = Ingredient
-
-# class InstructionInline(admin.TabularInline):
-#     model = Instruction 
+from .models import Recipe, Comment
 
 admin.site.register(Recipe)
-# class RecipeAdmin(admin.ModelAdmin):
-#     inlines = [IngredientInline, InstructionInline]
+
+@admin.register(Comment)
+class CommentAdmin(admin.ModelAdmin):
+    list_display = ('name', 'email', 'post', 'created', 'active')
+    list_filter = ('active', 'created', 'updated')
+    search_fields = ('name', 'email', 'body')
 
