@@ -11,6 +11,32 @@ from rest_framework import viewsets
 from .serializers import RecipeSerializer
 from django.contrib.auth import login, authenticate
 from django.contrib.auth.forms import AuthenticationForm
+from django.core.paginator import Paginator
+from rest_framework.decorators import api_view
+
+
+@api_view(['GET', 'POST', 'DELETE'])
+def index(request):
+    recipes = Recipe.objects.all().order_by('date')
+    if "recipes" not in request.session:
+        request.session["recipes"] = []
+
+    filter = RecipeFilter(request.GET, queryset=Recipe.objects.all())
+    recipes = filter.qs
+
+    # recipes = Recipe.objects.all().order_by('-date')
+    paginator = Paginator(recipes, 15)
+
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
+
+
+
+    return render(request, "recipes/index.html", {
+        "recipes": recipes,
+        "filter": filter,
+        'page_obj':page_obj
+    })
 
 
 class RecipeViewSet(viewsets.ModelViewSet):
@@ -26,11 +52,17 @@ def index(request):
     recipes = filter.qs
 
     # recipes = Recipe.objects.all().order_by('-date')
+    paginator = Paginator(recipes, 15)
+
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
+
 
 
     return render(request, "recipes/index.html", {
         "recipes": recipes,
-        "filter": filter
+        "filter": filter,
+        'page_obj':page_obj
     })
 
 def loginView(request):
