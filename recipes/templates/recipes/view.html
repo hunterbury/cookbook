@@ -39,7 +39,7 @@
                         <h2>Your comment has been added.</h2>
                         {% else %}
                         <h2>Add a new comment</h2>
-                        <form action="." method="post">
+                        <form action="{% url 'recipes:comment' pk=recipe.id %}" method="post">
                             {{ comment_form.as_p }}
                             {% csrf_token %}
                             <p><input type="submit" value="Comment"></p>
@@ -148,7 +148,7 @@
     </ol> {% endcomment %}
     
 
-    <a href="{% url 'recipes:update-recipe' pk=recipe.id %}">Update Recipe</a>
-    <a href="{% url 'recipes:delete-recipe' pk=recipe.id %}">Delete Recipe</a>
+    <a href="{% url 'recipes:update' pk=recipe.id %}">Update Recipe</a>
+    <a href="{% url 'recipes:delete' pk=recipe.id %}">Delete Recipe</a>
 
 {% endblock %}

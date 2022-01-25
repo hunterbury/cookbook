@@ -21,16 +21,16 @@
   <h1>Cookbook</h1>
   <h4>Sort By:</h4>
   <h5>Cuisine:</h5>
-  <a class="btn btn-light" href="{% url 'recipes:recipes' %}?cuisine=American&meal=" role="button">American</a>
-  <a class="btn btn-light" href="{% url 'recipes:recipes' %}?cuisine=Asian&meal=" role="button">Asian</a>
-  <a class="btn btn-light" href="{% url 'recipes:recipes' %}?cuisine=Indian&meal=" role="button">Indian</a>
-  <a class="btn btn-light" href="{% url 'recipes:recipes' %}?cuisine=Mexican&meal=" role="button">Mexican</a>
+  <a class="btn btn-light" href="{% url 'recipes:index' %}?cuisine=American&meal=" role="button">American</a>
+  <a class="btn btn-light" href="{% url 'recipes:index' %}?cuisine=Asian&meal=" role="button">Asian</a>
+  <a class="btn btn-light" href="{% url 'recipes:index' %}?cuisine=Indian&meal=" role="button">Indian</a>
+  <a class="btn btn-light" href="{% url 'recipes:index' %}?cuisine=Mexican&meal=" role="button">Mexican</a>
 
   <h5>Meal:</h5>
-  <a class="btn btn-light" href="{% url 'recipes:recipes' %}?cuisine=&meal=Breakfast" role="button">Breakfast</a>
-  <a class="btn btn-light" href="{% url 'recipes:recipes' %}?cuisine=&meal=Lunch" role="button">Lunch</a>
-  <a class="btn btn-light" href="{% url 'recipes:recipes' %}?cuisine=n&meal=Dinner" role="button">Dinner</a>
-  <a class="btn btn-light" href="{% url 'recipes:recipes' %}?cuisine=&meal=Snack" role="button">Snack</a>
+  <a class="btn btn-light" href="{% url 'recipes:index' %}?cuisine=&meal=Breakfast" role="button">Breakfast</a>
+  <a class="btn btn-light" href="{% url 'recipes:index' %}?cuisine=&meal=Lunch" role="button">Lunch</a>
+  <a class="btn btn-light" href="{% url 'recipes:index' %}?cuisine=n&meal=Dinner" role="button">Dinner</a>
+  <a class="btn btn-light" href="{% url 'recipes:index' %}?cuisine=&meal=Snack" role="button">Snack</a>
 
   {% comment %} <div class="form-wrapper">
     <h4>Sort By:</h4>
@@ -48,7 +48,7 @@
   <div class="gallery">
     {% for recipe in page_obj %}
     <div class="gallery-item col">
-      <a href="{% url 'recipes:view-recipe' pk=recipe.id %}">
+      <a href="{% url 'recipes:view' pk=recipe.id %}">
         <img class="gallery-image" src="{{recipe.image}}" alt="{{recipe.title}}">
       </a>
     </div>

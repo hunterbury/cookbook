@@ -1,10 +1,10 @@
 from rest_framework.response import Response
-from .models import Recipe, Comment
+from ..recipes.models import Recipe, Comment
 from .serializers import RecipeSerializer
 from django.shortcuts import render, redirect
-from .filters import RecipeFilter
+from ..recipes.filters import RecipeFilter
 from django.core.paginator import Paginator
-from .forms import RecipeForm, CommentForm
+from ..recipes.forms import RecipeForm, CommentForm
 
 
 def getRecipesList(request):

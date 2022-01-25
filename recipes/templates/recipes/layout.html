@@ -14,18 +14,18 @@
         <script src="{% static 'recipes/js/app.js' %}"></script>   
         <link rel="stylesheet" href="{% static 'recipes/css/index.css' %}">
         <title>
-            Recipes
+            Cookbook
         </title>
     </head>
     <body>
-      <nav class="top">
+      {% comment %} <nav class="top">
         <div class="dropdownBackground">
           <span class="arrow"></span>
         </div>
     
         <ul class="cool">
           <li>
-            <a href="#">About Me</a>
+            <a href="{% url 'recipes:index' %}">Home</a>
             <div class="dropdown dropdown1">
               <div class="bio">
                 <img src="https://logo.clearbit.com/wesbos.com">
@@ -34,7 +34,7 @@
             </div>
           </li>
           <li>
-            <a href="#">Courses</a>
+            <a href="#">Recipes</a>
             <ul class="dropdown courses">
               <li>
                 <span class="code">RFB</span>
@@ -75,7 +75,7 @@
             </ul>
           </li>
           <li>
-            <a href="#">Other Links</a>
+            <a href="#">Add A Recipe</a>
             <ul class="dropdown dropdown3">
               <li><a class="button" href="http://twitter.com/wesbos">Twitter</a></li>
               <li><a class="button" href="http://facebook.com/wesbos.developer">Facebook</a></li>
@@ -83,8 +83,11 @@
               <li><a class="button" href="http://wesbos.com/courses">Course Catalog</a></li>
             </ul>
           </li>
+          <li>
+            <a href="{% url 'recipes:logout' %}">Log Out</a>
+          </li>
         </ul>
-      </nav>
+      </nav> {% endcomment %}
     
       {% comment %} <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <div class="container px-5">
@@ -128,7 +131,7 @@
             </div>
         </div>
       </nav> {% endcomment %}
-      {% comment %} <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+       {% comment %} <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <div class="container">
             <a class="navbar-brand" href="{% url 'recipes:index' %}">Cookbook</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
@@ -142,14 +145,46 @@
             </form>
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
-                    {% comment %} <li class="nav-item"><a class="nav-link" href="{% url 'recipes:index' %}">Home</a></li> 
+                     <li class="nav-item"><a class="nav-link" href="{% url 'recipes:index' %}">Home</a></li> 
                     <li class="nav-item"><a class="nav-link" href="{% url 'recipes:add' %}">Add a Recipe</a></li>
                 </ul>
             </div>
             <p><a href="{% url 'recipes:logout' %}">Log Out</a></p>
         </div>
+      </nav> {% endcomment %}
+      <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <a class="navbar-brand" href="{% url 'recipes:index' %}">Cookbook</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+      
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+              <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'recipes:create' %}">Add a Recipe</a>
+            </li>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Dropdown
+              </a>
+              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                <a class="dropdown-item" href="#">Action</a>
+                <a class="dropdown-item" href="#">Another action</a>
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item" href="#">Something else here</a>
+              </div>
+            </li>
+          </ul>
+          <form class="form-inline my-2 my-lg-0" action="{% url 'recipes:index' %}" method="GET">
+            {{ filter.form.search }}
+            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+          </form>
+        </div>
       </nav>
-          {% comment %} <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+      {% comment %} <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
             <a class="navbar-brand" href="{% url 'recipes:index' %}">Cookbook</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
               <span class="navbar-toggler-icon"></span>
@@ -182,12 +217,12 @@
                     <a class="dropdown-item" href="#{% url 'recipes:index' %}?cuisine=Indican&meal=">Indian</a>
                   </div>
                   <li class="nav-item">
-                    <a class="nav-link" href="{% url 'recipes:add' %}">Add a Recipe</a>
+                    <a class="nav-link" href="{% url 'recipes:create' %}">Add a Recipe</a>
                   </li>
   
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link" href="#">About</a>
+                  <a href="{% url 'recipes:logout' %}">Log Out</a>
                 </li>
               </ul>
               <form action="{% url 'recipes:index' %}" method="GET" placeholder="Search">
