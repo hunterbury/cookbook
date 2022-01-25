@@ -46,7 +46,7 @@
                         </form>
                         {% endif %}
                         <!-- Comment form-->
-                        <form class="mb-4"><textarea class="form-control" rows="3" placeholder="Join the discussion and leave a comment!"></textarea></form>
+                        {% comment %} <form class="mb-4"><textarea class="form-control" rows="3" placeholder="Join the discussion and leave a comment!"></textarea></form> {% endcomment %}
                         <!-- Comment with nested comments-->
                         {% comment %} <div class="d-flex mb-4">
                             <!-- Parent comment-->
@@ -75,7 +75,7 @@
                         {% for comment in comments %}
                         <div class="comment">
                             <p class="info">
-                            Comment {{ forloop.counter }} by {{ comment.name }}
+                            {{ comment.name }}
                             {{ comment.created }}
                             </p>
                             {{ comment.body|linebreaks }}
@@ -83,14 +83,6 @@
                         {% empty %}
                         <p>There are no comments yet.</p>
                         {% endfor %}
-                        <!-- Single comment-->
-                        <div class="d-flex">
-                            <div class="flex-shrink-0"><img class="rounded-circle" src="https://dummyimage.com/50x50/ced4da/6c757d.jpg" alt="..." /></div>
-                            <div class="ms-3">
-                                <div class="fw-bold">Commenter Name</div>
-                                When I look at the universe and all the ways the universe wants to kill us, I find it hard to reconcile that with statements of beneficence.
-                            </div>
-                        </div>
                     </div>
                 </div>
             </section>
@@ -156,7 +148,7 @@
     </ol> {% endcomment %}
     
 
-    <a href="{% url 'recipes:update' pk=recipe.id %}">Update Recipe</a>
-    <a href="{% url 'recipes:delete' pk=recipe.id %}">Delete Recipe</a>
+    <a href="{% url 'recipes:update-recipe' pk=recipe.id %}">Update Recipe</a>
+    <a href="{% url 'recipes:delete-recipe' pk=recipe.id %}">Delete Recipe</a>
 
 {% endblock %}

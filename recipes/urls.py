@@ -6,7 +6,12 @@ from . import views
 
 app_name = "recipes"
 urlpatterns = [
-    path("", views.index, name="index"),
+    path('', views.recipes, name="recipes"),
+    path('create/', views.createRecipe, name="create-recipe"),
+    path('recipes/<str:pk>/', views.viewRecipe, name="view-recipe"),
+    path('recipes/<str:pk>/update', views.updateRecipe, name="update-recipe"),
+    path('recipes/<str:pk>/delete', views.deleteRecipe, name="delete-recipe"),
+
     # path("add/", views.add, name="add"),
     # path("update/<str:pk>", views.update, name="update"),
     # path("delete/<str:pk>", views.delete, name="delete"),
