@@ -74,7 +74,10 @@ def createRecipe(request):
     filter = RecipeFilter(request.GET, queryset=Recipe.objects.all())
 
     if request.method == "GET":
-        form = RecipeForm()
+        form = RecipeForm(initial = {
+            'ingredients': "- ",
+            'instructions': "1. ",
+        })
         return render(request, "recipes/add.html", {
             "form":form,
             "filter": filter
@@ -135,6 +138,9 @@ def updateRecipe(request, pk):
 
 def deleteRecipe(request, pk):
     recipe = Recipe.objects.get(id=pk)
+    comments = recipe.comments.filter(active=True)
+    comment_form = CommentForm()
+    new_comment = None
 
     if request.method == 'GET':
         return render(request, "recipes/delete.html", {
@@ -162,7 +168,12 @@ def createComment(request, pk):
     
     comments = recipe.comments.filter(active=True)
 
-    return redirect('recipes:view')
+    return render(request, 'recipes/view.html', {
+        'recipe': recipe,
+        'comments': comments,
+        'new_comment': new_comment,
+        'comment_form': comment_form
+    })
 
 def loginView(request):
     if request.method == 'POST':

@@ -8,4 +8,5 @@ urlpatterns = [
     path('delete/<str:pk>/', views.deleteRecipe, name="delete-recipe"),
     path('update/<str:pk>/', views.updateRecipe, name="update-recipe"),
     path('view/<str:pk>/comment/', views.createComment, name="create-comment"),
+    path('comments/', views.getComments, name="comments")
 ]

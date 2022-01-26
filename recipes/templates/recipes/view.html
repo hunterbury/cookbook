@@ -13,6 +13,8 @@
                     <h1 class="fw-bolder mb-1">{{ recipe.title }}</h1>
                     <!-- Post meta content-->
                     <div class="text-muted fst-italic mb-2">{{ recipe.date }}</div>
+                    <a href="{% url 'recipes:update' pk=recipe.id %}">Update Recipe</a>
+                    <a href="{% url 'recipes:delete' pk=recipe.id %}">Delete Recipe</a>
                     <!-- Post categories-->
                     {% if recipe.cuisine %}
                         <a class="badge bg-secondary text-decoration-none link-light" href="#!">{{ recipe.cuisine }}</a>
@@ -25,6 +27,7 @@
                 <figure class="mb-4"><img class="img-fluid rounded" src="{{ recipe.image }}" alt="..." /></figure>
                 <!-- Post content-->
                 <section class="mb-5">
+                    <p class="fs-5 mb-4">{{ recipe.description }}</p>
                     <h2 class="fw-bolder mb-4 mt-5">Ingredients</h2>
                     <p class="fs-5 mb-4">{{ recipe.ingredients }}</p>
                     <h2 class="fw-bolder mb-4 mt-5">Instructions</h2>
@@ -32,7 +35,42 @@
                 </section>
             </article>
             <!-- Comments section-->
-            <section class="mb-5">
+            <div class="container mt-5 mb-5">
+                <div class="d-flex justify-content-center row">
+                    <div class="d-flex flex-column col-md-8">
+                        <div class="coment-bottom bg-white p-2 px-4">
+                            {% if new_comment %}
+                            <h2>Your comment has been added.</h2>
+                            {% else %}
+                            <div class="d-flex flex-row add-comment-section mt-4 mb-4">
+                                <img class="img-fluid img-responsive rounded-circle mr-2" src="https://www.nicepng.com/png/detail/136-1366211_group-of-10-guys-login-user-icon-png.png" width="38">
+                                <form action="{% url 'recipes:comment' pk=recipe.id %}" method="post">
+                                    {{ comment_form.as_p }}
+                                    {% csrf_token %}
+                                    <p><input type="submit" value="Comment"></p>
+                                </form>
+                            </div>
+                            {% endif %}
+                            {% for comment in comments %}
+                            <div class="commented-section mt-2">
+                                <div class="d-flex flex-row align-items-center commented-user">
+                                    <h5 class="mr-2">{{ comment.name }}</h5><span class="dot mb-1"></span><span class="mb-1 ml-2">{{ comment.created }}</span>
+                                </div>
+                                <div class="comment-text-sm"><span>{{ comment.body }}</span></div>
+                                <div class="reply-section">
+                                    <div class="d-flex flex-row align-items-center voting-icons"><i class="fa fa-sort-up fa-2x mt-3 hit-voting"></i><i class="fa fa-sort-down fa-2x mb-3 hit-voting"></i><span class="ml-2">10</span><span class="dot ml-2"></span>
+                                        <h6 class="ml-2 mt-1">Reply</h6>
+                                    </div>
+                                </div>
+                            </div>
+                            {% empty %}
+                            <p>There are no comments yet.</p>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% comment %} <section class="mb-5">
                 <div class="card bg-light">
                     <div class="card-body">
                         {% if new_comment %}
@@ -44,7 +82,7 @@
                             {% csrf_token %}
                             <p><input type="submit" value="Comment"></p>
                         </form>
-                        {% endif %}
+                        {% endif %} {% endcomment %}
                         <!-- Comment form-->
                         {% comment %} <form class="mb-4"><textarea class="form-control" rows="3" placeholder="Join the discussion and leave a comment!"></textarea></form> {% endcomment %}
                         <!-- Comment with nested comments-->
@@ -72,7 +110,7 @@
                                 </div>
                             </div>
                         </div> {% endcomment %}
-                        {% for comment in comments %}
+                        {% comment %} {% for comment in comments %}
                         <div class="comment">
                             <p class="info">
                             {{ comment.name }}
@@ -86,7 +124,7 @@
                     </div>
                 </div>
             </section>
-        </div>
+        </div> {% endcomment %}
         <!-- Side widgets-->
         {% comment %} <div class="col-lg-4">
             <!-- Search widget-->
@@ -130,25 +168,5 @@
     </div>
 </div>
 
-    {% comment %} <h1>{{ recipe.title }}</h1>
-    <span class="card-text">{{ recipe.cuisine }}</span>
-    <span class="card-text">{{ recipe.meal }}</span>
-    <img class="card-img-top" src="{{ recipe.image }}" style="width: 20em; height: 20em;" alt="Card image cap">
-
-    <ul>
-    {% for ingredient in recipe.ingredients.all %}
-        <li>{{ ingredient.name }}</li>
-    {% endfor %}
-    </ul>
-
-    <ol>
-        {% for instruction in recipe.instructions.all %}
-            <li>{{ instruction.instruction }}</li>
-        {% endfor %}
-    </ol> {% endcomment %}
-    
-
-    <a href="{% url 'recipes:update' pk=recipe.id %}">Update Recipe</a>
-    <a href="{% url 'recipes:delete' pk=recipe.id %}">Delete Recipe</a>
 
 {% endblock %}
