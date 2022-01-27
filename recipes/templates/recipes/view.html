@@ -13,8 +13,8 @@
                     <h1 class="fw-bolder mb-1">{{ recipe.title }}</h1>
                     <!-- Post meta content-->
                     <div class="text-muted fst-italic mb-2">{{ recipe.date }}</div>
-                    <a href="{% url 'recipes:update' pk=recipe.id %}">Update Recipe</a>
-                    <a href="{% url 'recipes:delete' pk=recipe.id %}">Delete Recipe</a>
+                    <a href="{% url 'recipes:update' slug=recipe.slug %}">Update Recipe</a>
+                    <a href="{% url 'recipes:delete' slug=recipe.slug %}">Delete Recipe</a>
                     <!-- Post categories-->
                     {% if recipe.cuisine %}
                         <a class="badge bg-secondary text-decoration-none link-light" href="#!">{{ recipe.cuisine }}</a>
@@ -44,7 +44,7 @@
                             {% else %}
                             <div class="d-flex flex-row add-comment-section mt-4 mb-4">
                                 <img class="img-fluid img-responsive rounded-circle mr-2" src="https://www.nicepng.com/png/detail/136-1366211_group-of-10-guys-login-user-icon-png.png" width="38">
-                                <form action="{% url 'recipes:comment' pk=recipe.id %}" method="post">
+                                <form action="{% url 'recipes:comment' slug=recipe.slug %}" method="post">
                                     {{ comment_form.as_p }}
                                     {% csrf_token %}
                                     <p><input type="submit" value="Comment"></p>

@@ -1,7 +1,6 @@
 from django.contrib import admin
 from .models import Recipe, Comment
 
-admin.site.register(Recipe)
 
 @admin.register(Comment)
 class CommentAdmin(admin.ModelAdmin):
@@ -9,3 +8,7 @@ class CommentAdmin(admin.ModelAdmin):
     list_filter = ('active', 'created', 'updated')
     search_fields = ('name', 'email', 'body')
 
+class RecipeAdmin(admin.ModelAdmin):
+    prepopulated_fields = {'slug': ('title',)}
+
+admin.site.register(Recipe, RecipeAdmin)

@@ -34,9 +34,9 @@ def index(request):
         'page_obj':page_obj
     })
 
-def viewRecipe(request, pk):
+def viewRecipe(request, slug):
     filter = RecipeFilter(request.GET, queryset=Recipe.objects.all())
-    recipe = Recipe.objects.get(id=pk)
+    recipe = Recipe.objects.get(slug=slug)
 
     comments = recipe.comments.filter(active=True)
     comment_form = CommentForm()
@@ -101,8 +101,8 @@ def createRecipe(request):
         "filter": filter
     })
 
-def updateRecipe(request, pk):
-    recipe = Recipe.objects.get(id=pk)
+def updateRecipe(request, slug):
+    recipe = Recipe.objects.get(slug=slug)
 
     if request.method == 'GET':
         form = RecipeForm(initial = {
@@ -123,7 +123,7 @@ def updateRecipe(request, pk):
         if form.is_valid():
             form.save()
             recipe = form.cleaned_data.get("recipe")
-            return redirect('recipes:view', pk)
+            return redirect('recipes:view', slug)
 
         else:    
             return render(request, "recipes/update.html", {
@@ -136,8 +136,8 @@ def updateRecipe(request, pk):
         "recipe": recipe,
     })
 
-def deleteRecipe(request, pk):
-    recipe = Recipe.objects.get(id=pk)
+def deleteRecipe(request, slug):
+    recipe = Recipe.objects.get(slug=slug)
     comments = recipe.comments.filter(active=True)
     comment_form = CommentForm()
     new_comment = None
@@ -152,9 +152,9 @@ def deleteRecipe(request, pk):
         
         return redirect('/')
 
-def createComment(request, pk):
+def createComment(request, slug):
     filter = RecipeFilter(request.GET, queryset=Recipe.objects.all())
-    recipe = Recipe.objects.get(id=pk)
+    recipe = Recipe.objects.get(slug=slug)
     new_comment = None
     # A comment was posted
     comment_form = CommentForm(data=request.POST)

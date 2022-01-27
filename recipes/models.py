@@ -1,6 +1,8 @@
 from django.db import models
 from recipes.choices import *
 from django.contrib.auth.models import User
+from django.urls import reverse
+from django.template.defaultfilters import slugify
 
 
 class Recipe(models.Model):        
@@ -15,9 +17,18 @@ class Recipe(models.Model):
     servings = models.IntegerField()
     ingredients = models.TextField(null=True, blank=True)
     instructions = models.TextField(null=True, blank=True)
+    slug = models.SlugField(blank=True, null=True, unique=True)
 
     def __str__(self):
         return self.title
+
+    def get_absolute_url(self):
+        return reverse('recipes:view', kwargs={'slug': self.slug})
+
+    def save(self, *args, **kwargs): # new
+        if not self.slug:
+            self.slug = slugify(self.title)
+        return super().save(*args, **kwargs)
 
 class Comment(models.Model): 
     recipe = models.ForeignKey(Recipe, on_delete=models.CASCADE, related_name='comments')

@@ -48,7 +48,7 @@
   <div class="gallery">
     {% for recipe in page_obj %}
     <div class="gallery-item col">
-      <a href="{% url 'recipes:view' pk=recipe.id %}">
+      <a href="{% url 'recipes:view' slug=recipe.slug %}">
         <img class="gallery-image" src="{{recipe.image}}" alt="{{recipe.title}}">
       </a>
     </div>
