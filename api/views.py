@@ -32,7 +32,7 @@ def updateRecipe(request, pk):
         serializer.save()
     return Response(serializer.data)
 
-@api_view(['GET','POST'])
+@api_view(['POST'])
 def deleteRecipe(request, pk):
     recipe = Recipe.objects.get(id=pk)
     recipe.delete()

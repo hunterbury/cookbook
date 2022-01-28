@@ -13,6 +13,17 @@ from django.contrib.auth.forms import AuthenticationForm
 from rest_framework.response import Response
 
 def index(request):
+    recipes = Recipe.objects.all().order_by('-date')
+
+    if request.user.is_authenticated:
+            return render(request, "recipes/index.html", {
+            "recipes": recipes,
+        })
+    else:
+        return redirect('/login/')
+    
+
+def blog(request):
     recipes = Recipe.objects.all().order_by('date')
     if "recipes" not in request.session:
         request.session["recipes"] = []
@@ -28,7 +39,7 @@ def index(request):
 
 
 
-    return render(request, "recipes/index.html", {
+    return render(request, "recipes/blog.html", {
         "recipes": recipes,
         "filter": filter,
         'page_obj':page_obj
@@ -185,7 +196,7 @@ def loginView(request):
             return redirect('/')
     else:
         form = AuthenticationForm()
-    return render(request, 'registration/login.html', {'form': form})
+    return render(request, 'recipes/index.html', {'form': form})
 
 def demoLogin(request):
     if request.method == 'POST':
@@ -195,7 +206,8 @@ def demoLogin(request):
         login(request, user)
         return redirect('/')
 
-
+def logout(request):
+    return render(request, 'recipes/index.html', {})
 
 
 # def update(request, pk):

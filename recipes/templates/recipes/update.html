@@ -4,8 +4,9 @@
 
 
 {% block body %}
-    <h1>Update Recipe</h1>
+    <h1 class="text-center">Update Recipe</h1>
 
+  <div class="container">
     <form action="{% url 'recipes:update' slug=recipe.slug %}" method="POST" enctype="multipart/form-data">
         {% csrf_token %}
         <div class="form-row">
@@ -48,4 +49,5 @@
             </table> {% endcomment %}
         <button type="submit" class="btn btn-primary">Submit</button>
     </form>
+  </div>
 {% endblock %}

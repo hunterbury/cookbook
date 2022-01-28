@@ -1,75 +1,112 @@
 {% extends "recipes/layout.html" %}
  
 {% block body %}
-
-<div class="container mt-5">
-    <div class="row">
-        <div class="col-lg-8">
-            <!-- Post content-->
-            <article>
-                <!-- Post header-->
-                <header class="mb-4">
-                    <!-- Post title-->
-                    <h1 class="fw-bolder mb-1">{{ recipe.title }}</h1>
-                    <!-- Post meta content-->
-                    <div class="text-muted fst-italic mb-2">{{ recipe.date }}</div>
-                    <a href="{% url 'recipes:update' slug=recipe.slug %}">Update Recipe</a>
-                    <a href="{% url 'recipes:delete' slug=recipe.slug %}">Delete Recipe</a>
-                    <!-- Post categories-->
-                    {% if recipe.cuisine %}
-                        <a class="badge bg-secondary text-decoration-none link-light" href="#!">{{ recipe.cuisine }}</a>
-                    {% endif %}
-                    {% if recipe.meal %}
-                        <a class="badge bg-secondary text-decoration-none link-light" href="#!">{{ recipe.meal }}</a>
-                    {% endif %}
-                </header>
-                <!-- Preview image figure-->
-                <figure class="mb-4"><img class="img-fluid rounded" src="{{ recipe.image }}" alt="..." /></figure>
+<section>
+    <div class="container mt-5">
+        <div class="row">
+            <section class="col-lg-8">
                 <!-- Post content-->
-                <section class="mb-5">
-                    <p class="fs-5 mb-4">{{ recipe.description }}</p>
-                    <h2 class="fw-bolder mb-4 mt-5">Ingredients</h2>
-                    <p class="fs-5 mb-4">{{ recipe.ingredients }}</p>
-                    <h2 class="fw-bolder mb-4 mt-5">Instructions</h2>
-                    <p class="fs-5 mb-4">{{ recipe.instructions }}</p>
-                </section>
-            </article>
-            <!-- Comments section-->
-            <div class="container mt-5 mb-5">
-                <div class="d-flex justify-content-center row">
-                    <div class="d-flex flex-column col-md-8">
-                        <div class="coment-bottom bg-white p-2 px-4">
-                            {% if new_comment %}
-                            <h2>Your comment has been added.</h2>
-                            {% else %}
-                            <div class="d-flex flex-row add-comment-section mt-4 mb-4">
-                                <img class="img-fluid img-responsive rounded-circle mr-2" src="https://www.nicepng.com/png/detail/136-1366211_group-of-10-guys-login-user-icon-png.png" width="38">
-                                <form action="{% url 'recipes:comment' slug=recipe.slug %}" method="post">
-                                    {{ comment_form.as_p }}
-                                    {% csrf_token %}
-                                    <p><input type="submit" value="Comment"></p>
-                                </form>
-                            </div>
-                            {% endif %}
-                            {% for comment in comments %}
-                            <div class="commented-section mt-2">
-                                <div class="d-flex flex-row align-items-center commented-user">
-                                    <h5 class="mr-2">{{ comment.name }}</h5><span class="dot mb-1"></span><span class="mb-1 ml-2">{{ comment.created }}</span>
+                <article>
+                    <!-- Post header-->
+                    <header class="mb-4">
+                        <!-- Post title-->
+                        <h1 class="fw-bolder mb-1">{{ recipe.title }}</h1>
+                        <!-- Post meta content-->
+                        <div class="text-muted fst-italic mb-2">{{ recipe.date }}</div>
+                        {% comment %} <a href="{% url 'recipes:update' slug=recipe.slug %}">Update Recipe</a>
+                        <a href="{% url 'recipes:delete' slug=recipe.slug %}">Delete Recipe</a> {% endcomment %}
+                        <!-- Post categories-->
+                        {% if recipe.cuisine %}
+                            <a class="badge bg-secondary text-decoration-none link-light" href="#!">{{ recipe.cuisine }}</a>
+                        {% endif %}
+                        {% if recipe.meal %}
+                            <a class="badge bg-secondary text-decoration-none link-light" href="#!">{{ recipe.meal }}</a>
+                        {% endif %}
+                    </header>
+                    <!-- Preview image figure-->
+                    <figure class="mb-4"><img class="img-fluid rounded" src="{{ recipe.image }}" alt="..." /></figure>
+                    <!-- Post content-->
+                    <section class="mb-5">
+                        <p class="fs-5 mb-4">{{ recipe.description }}</p>
+                        <h2 class="fw-bolder mb-4 mt-5">Ingredients</h2>
+                        <p class="fs-5 mb-4">{{ recipe.ingredients }}</p>
+                        <h2 class="fw-bolder mb-4 mt-5">Instructions</h2>
+                        <p class="fs-5 mb-4">{{ recipe.instructions }}</p>
+                    </section>
+                </article>
+                <!-- Comments section-->
+                <div class="container mt-5 mb-5">
+                    <div class="d-flex justify-content-center row">
+                        <div class="d-flex flex-column col-md-8">
+                            <div class="coment-bottom bg-white p-2 px-4">
+                                {% if new_comment %}
+                                <h2>Your comment has been added.</h2>
+                                {% else %}
+                                <div class="d-flex flex-row add-comment-section mt-4 mb-4">
+                                    <img class="img-fluid img-responsive rounded-circle mr-2" src="https://www.nicepng.com/png/detail/136-1366211_group-of-10-guys-login-user-icon-png.png" width="38">
+                                    <form action="{% url 'recipes:comment' slug=recipe.slug %}" method="post">
+                                        {{ comment_form.as_p }}
+                                        {% csrf_token %}
+                                        <p><input type="submit" value="Comment"></p>
+                                    </form>
                                 </div>
-                                <div class="comment-text-sm"><span>{{ comment.body }}</span></div>
-                                <div class="reply-section">
-                                    <div class="d-flex flex-row align-items-center voting-icons"><i class="fa fa-sort-up fa-2x mt-3 hit-voting"></i><i class="fa fa-sort-down fa-2x mb-3 hit-voting"></i><span class="ml-2">10</span><span class="dot ml-2"></span>
-                                        <h6 class="ml-2 mt-1">Reply</h6>
+                                {% endif %}
+                                {% for comment in comments %}
+                                <div class="commented-section mt-2">
+                                    <div class="d-flex flex-row align-items-center commented-user">
+                                        <h5 class="mr-2">{{ comment.name }}</h5><span class="dot mb-1"></span><span class="mb-1 ml-2">{{ comment.created }}</span>
+                                    </div>
+                                    <div class="comment-text-sm"><span>{{ comment.body }}</span></div>
+                                    <div class="reply-section">
+                                        <div class="d-flex flex-row align-items-center voting-icons"><i class="fa fa-sort-up fa-2x mt-3 hit-voting"></i><i class="fa fa-sort-down fa-2x mb-3 hit-voting"></i><span class="ml-2">10</span><span class="dot ml-2"></span>
+                                            <h6 class="ml-2 mt-1">Reply</h6>
+                                        </div>
                                     </div>
                                 </div>
+                                {% empty %}
+                                <p>There are no comments yet.</p>
+                                {% endfor %}
                             </div>
-                            {% empty %}
-                            <p>There are no comments yet.</p>
-                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <div class="col-lg-4 mt-5 py-5">
+                <div class="card mb-4">
+                    <div class="card-header">Recipe Actions</div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <ul class="list-unstyled mb-0">
+                                    <li><a href="{% url 'recipes:update' slug=recipe.slug %}">Update recipe</a></li>
+                                    <li><a href="{% url 'recipes:delete' slug=recipe.slug %}" id="myBtn">Delete recipe</a></li>
+                                </ul>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
+        </div>
+    </div>
+    <div id="myModal" class="modal">
+
+        <!-- Modal content -->
+        <div class="modal-content">
+          <span class="close">&times;</span>
+          <h2>Are you sure you want to delete "{{recipe.title}}"?</h2>
+          <div class="container modal-footer text-center">
+            <a href="{% url 'recipes:view' slug=recipe.slug %}"><button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button></a>
+            <form action="{% url 'recipes:delete' slug=recipe.slug %}" method="POST">
+                {% csrf_token %}
+                <input type="submit" name="Confirm" class="btn btn-primary">
+            </form>
+           </div>
+        </div>
+      </div>
+
+</section>
+
+{% endblock %}
             {% comment %} <section class="mb-5">
                 <div class="card bg-light">
                     <div class="card-body">
@@ -165,6 +202,3 @@
                 <div class="card-body">You can put anything you want inside of these side widgets. They are easy to use, and feature the Bootstrap 5 card component!</div>
             </div>
         </div> {% endcomment %}
-    </div>
-</div>
-{% endblock %}
