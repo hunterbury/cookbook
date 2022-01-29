@@ -1,12 +1,3 @@
-body {
-  background: #ECE9E6;
-  /* fallback for old browsers */
-  /* Chrome 10-25, Safari 5.1-6 */
-  background: -webkit-gradient(linear, left top, left bottom, from(#ECE9E6), to(#FFFFFF));
-  background: linear-gradient(to bottom, #ECE9E6, #FFFFFF);
-  /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-}
-
 nav {
   padding: 30px;
 }
@@ -130,6 +121,23 @@ nav {
   color: black;
   text-decoration: none;
   cursor: pointer;
+}
+
+.comment-section {
+  width: 100vw;
+  padding: 30px;
+}
+
+.comment-section div {
+  background-color: inherit;
+}
+
+.comment-section form {
+  width: 600px;
+}
+
+.comment-section .commentBtn {
+  float: right;
 }
 
 /*
