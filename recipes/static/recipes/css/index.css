@@ -138,10 +138,6 @@ nav {
   background-color: inherit;
 }
 
-.comment-section form {
-  width: 600px;
-}
-
 .comment-section .commentBtn {
   float: right;
 }
