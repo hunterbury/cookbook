@@ -26,7 +26,7 @@ SECRET_KEY = 'django-insecure-de!k19_b3zas+%2jvk2d!lqyvvc_kh23o=e$@oil^oupm9&g*6
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['hunterbury-cookbook.herokuapp.com']
 
 
 # Application definition
