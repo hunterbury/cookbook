@@ -15,6 +15,7 @@ Cookbook is a recipe blog with CRUD functionality. The back-end uses Django Rest
 - CRUD functionality
 - REST API
 - Django models, forms, and filters
+- Pagination
 
 
 
