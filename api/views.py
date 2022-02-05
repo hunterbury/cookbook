@@ -12,8 +12,8 @@ def getRecipes(request):
     return Response(serializer.data)
 
 @api_view(['GET'])
-def viewRecipe(request, pk):
-    recipe = Recipe.objects.get(id=pk)
+def viewRecipe(request, slug):
+    recipe = Recipe.objects.get(slug=slug)
     serializer = RecipeSerializer(recipe, many=False)
     return Response(serializer.data)
 
@@ -25,21 +25,21 @@ def createRecipe(request):
     return Response(serializer.data)
 
 @api_view(['POST'])
-def updateRecipe(request, pk):
-    recipe = Recipe.objects.get(id=pk)
+def updateRecipe(request, slug):
+    recipe = Recipe.objects.get(slug=slug)
     serializer = RecipeSerializer(instance=recipe, data=request.data)
     if serializer.is_valid():
         serializer.save()
     return Response(serializer.data)
 
 @api_view(['POST'])
-def deleteRecipe(request, pk):
-    recipe = Recipe.objects.get(id=pk)
+def deleteRecipe(request, slug):
+    recipe = Recipe.objects.get(slug=slug)
     recipe.delete()
     return Response('Recipe was deleted!')
 
 @api_view(['POST'])
-def createComment(request, pk):
+def createComment(request, slug):
     serializer = CommentSerializer(data=request.data)
     if serializer.is_valid():
         serializer.save()
