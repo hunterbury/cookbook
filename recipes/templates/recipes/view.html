@@ -47,8 +47,8 @@
                         <div class="row">
                             <div class="col-sm-6">
                                 <ul class="list-unstyled mb-0">
-                                    <li><a href="{% url 'recipes:update' slug=recipe.slug %}">Update recipe</a></li>
-                                    <li id="myBtn"><a href="#">Delete recipe</a></li>
+                                    <li><a href="{% url 'recipes:update' slug=recipe.slug %}" class="text-black">Update recipe</a></li>
+                                    <li id="myBtn"><a href="#" class="text-black">Delete recipe</a></li>
                                 </ul>
                             </div>
                         </div>
@@ -57,7 +57,7 @@
             </div>
         </div>
     </div>
-    <div class="mt-5 mb-5comment-section justify-content-center">
+    <div class="mt-5 mb-5 comment-section justify-content-center">
         <div class="d-flex justify-content-center row">
             <h2 class="text-center">Comments</h2>
             <div class="d-flex flex-column">
@@ -73,7 +73,7 @@
                                 {% csrf_token %}
                                 {{ comment_form.name.label_tag }} {{ comment_form.name }}
                                 {{ comment_form.comment.label_tag }} {{ comment_form.comment}}
-                                <input type="submit" value="Comment" class="btn btn-primary rounded-pill commentBtn">
+                                <input type="submit" value="Comment" class="btn btn-dark rounded-pill commentBtn">
                             </form></div>
                         </div>
                     </div>
@@ -107,7 +107,7 @@
                 <a href="{% url 'recipes:view' slug=recipe.slug %}"><button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button></a>
                 <form action="{% url 'recipes:delete' slug=recipe.slug %}" method="POST">
                     {% csrf_token %}
-                    <input type="submit" name="Confirm" class="btn btn-primary">
+                    <input type="submit" name="Confirm" class="btn btn-dark">
                 </form>
             </div>
         </div>

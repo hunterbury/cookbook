@@ -19,7 +19,7 @@
                   <div class="small text-muted">{{ recipe.date }}</div>
                   <h2 class="card-title">{{ recipe.title}}</h2>
                   <p class="card-text">{{ recipe.description}}</p>
-                  <a class="btn btn-primary" href="{% url 'recipes:view' slug=recipe.slug %}">View recipe →</a>
+                  <a class="btn btn-dark" href="{% url 'recipes:view' slug=recipe.slug %}">View recipe →</a>
               </div>
           </div>
           <!-- Nested row for non-featured blog posts-->
@@ -33,7 +33,7 @@
                           <div class="small text-muted">{{ recipe.date }}</div>
                           <h2 class="card-title h4">{{ recipe.title}}</h2>
                           <p class="card-text">{{ recipe.description}}</p>
-                          <a class="btn btn-primary mt-auto" href="{% url 'recipes:view' slug=recipe.slug %}">View recipe →</a>
+                          <a class="btn btn-dark mt-auto" href="{% url 'recipes:view' slug=recipe.slug %}">View recipe →</a>
                       </div>
                   </div>
               </div>
@@ -114,7 +114,7 @@
                   <div class="input-group">
                     <form class="form-inline my-2 my-lg-0" action="{% url 'recipes:index' %}" method="GET">
                       {{ filter.form.search }}
-                      <button class="btn btn-primary rounded-pill my-2 my-sm-0" type="submit">Search</button>
+                      <button class="btn btn-dark rounded-pill my-2 my-sm-0" type="submit">Search</button>
                     </form>
                   </div>
               </div>
