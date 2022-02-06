@@ -129,7 +129,7 @@ def updateRecipe(request, slug):
             'instructions': recipe.instructions,
         })
     elif request.method == "POST":
-        form = RecipeForm(request.POST, instance=recipe)
+        form = RecipeForm(request.POST, request.FILES, instance=recipe)
 
         if form.is_valid():
             form.save()

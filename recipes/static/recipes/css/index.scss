@@ -85,6 +85,12 @@ nav {
 	transform: translateX(0%) scale(1);
 }
 
+.rounded-circle {
+	max-height: 500px;
+	min-width: 500px;
+	min-height: 500px;
+}
+
 .modal-footer {
 	justify-content: center;
 	align-self: center;
@@ -134,104 +140,7 @@ nav {
 	div {
 		background-color: inherit;
 	}
-
-	// form {
-	// 	width: 600px;
-	// }
-
-	.commentBtn {
-		float: right;
-	}
 }
-
-
-// //home
-// @import url(https://fonts.googleapis.com/css?family=Montserrat:500);
-
-// :root {
-// 	/* Base font size */
-// 	font-size: 10px;
-// }
-
-// *,
-// *::before,
-// *::after {
-// 	box-sizing: border-box;
-// }
-
-
-// .landing {
-// 	background-image: url(https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTXBFtbPAZiX9hY51pjwd9OnOEz9GBrXkj4Kw&usqp=CAU);
-// }
-
-// .container {
-// 	max-width: 100rem;
-// 	margin: 0 auto;
-// 	padding: 0 2rem 2rem;
-// }
-
-// .heading {
-// 	font-family: "Montserrat", Arial, sans-serif;
-// 	font-size: 4rem;
-// 	font-weight: 500;
-// 	line-height: 1.5;
-// 	text-align: center;
-// 	padding: 3.5rem 0;
-// 	color: #1a1a1a;
-// }
-
-// .heading span {
-// 	display: block;
-// }
-
-// .gallery {
-// 	display: flex;
-// 	flex-wrap: wrap;
-// 	/* Compensate for excess margin on outer gallery flex items */
-// 	margin: -1rem -1rem;
-// }
-
-// .gallery-item {
-// 	/* Minimum width of 24rem and grow to fit available space */
-// 	flex: 1 0 24rem;
-// 	/* Margin value should be half of grid-gap value as margins on flex items don't collapse */
-// 	margin: 1rem;
-// 	box-shadow: 0.3rem 0.4rem 0.4rem rgba(0, 0, 0, 0.4);
-// 	overflow: hidden;
-// }
-
-// .gallery-image {
-// 	display: block;
-// 	width: 100%;
-// 	height: 100%;
-// 	object-fit: cover;
-// 	transition: transform 400ms ease-out;
-// }
-
-// .gallery-image:hover {
-// 	transform: scale(1.15);
-// }
-
-/*
-
-The following rule will only run if your browser supports CSS grid.
-
-Remove or comment-out the code block below to see how the browser will fall-back to flexbox styling. 
-
-*/
-
-// @supports (display: grid) {
-// 	.gallery {
-// 		display: grid;
-// 		grid-template-columns: repeat(auto-fit, minmax(24rem, 1fr));
-// 		grid-gap: 2rem;
-// 	}
-
-// 	.gallery,
-// 	.gallery-item {
-// 		margin: 0;
-// 	}
-// }
 
 *, *:before, *:after {
     box-sizing: inherit;
@@ -270,8 +179,28 @@ Remove or comment-out the code block below to see how the browser will fall-back
     cursor: pointer
 }
 
-// footer {
-// 	position: absolute;
-//   	bottom: 0;
-//   	width: 100vw;
-// }
+.card-body {
+	a {
+		text-decoration: none;
+	}
+	a:hover {
+		text-decoration: underline;
+		text-decoration-color: black;
+	}
+}
+.card-title {
+	color: black;
+}
+
+.card-img-top {
+	max-height: 400px;
+}
+
+.blog-image {
+	min-width: 90%;
+	max-height: 600px;
+}
+
+.card-img-top-main {
+	width: 100%;
+}

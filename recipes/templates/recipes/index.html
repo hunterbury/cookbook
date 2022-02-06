@@ -8,29 +8,13 @@
         <h1 class="masthead-heading mb-0">COOKBOOK</h1>
         <h2 class="masthead-subheading mb-0">by Hunter Bury</h2>
     </div>
-
-        <!-- Header-->
-        {% comment %} <header class="masthead text-center text-white">
-            <div class="masthead-content">
-                <div class="container px-5">
-                    <h1 class="masthead-heading mb-0">Cookbook</h1>
-                    <h2 class="masthead-subheading mb-0">by Hunter Bury</h2>
-                    <a class="btn btn-primary btn-xl rounded-pill mt-5" href="#scroll">View Recipes</a>
-                </div>
-            </div>
-            <div class="bg-circle-1 bg-circle"></div>
-            <div class="bg-circle-2 bg-circle"></div>
-            <div class="bg-circle-3 bg-circle"></div>
-            <div class="bg-circle-4 bg-circle"></div>
-        </header> {% endcomment %}
-        <!-- Content section 1-->
         {% for recipe in recipes %}
         {% if forloop.counter|divisibleby:2 %}
         <section>
             <div class="container px-5">
                 <div class="row gx-5 align-items-center">
                     <div class="col-lg-6">
-                        <a href="{% url 'recipes:view' slug=recipe.slug %}" class="p-5"><img class="img-fluid rounded-circle align-right slide-in" src="{{ recipe.image }}" alt="..." /></a>
+                        <a href="{% url 'recipes:view' slug=recipe.slug %}" class="p-5"><img class="img-fluid rounded-circle" src="{{ recipe.image }}" alt="..." /></a>
                     </div>
                     <div class="col-lg-6">
                         <div class="p-5">
@@ -41,12 +25,13 @@
                 </div>
             </div>
         </section>
+        
         {% else %}
         <section id="scroll">
             <div class="container px-5">
                 <div class="row gx-5 align-items-center">
                     <div class="col-lg-6 order-lg-2">
-                        <a href="{% url 'recipes:view' slug=recipe.slug %}" class="p-5"><img class="img-fluid rounded-circle align-left slide-in" src="{{ recipe.image }}" alt="..." /></a>
+                        <a href="{% url 'recipes:view' slug=recipe.slug %}" class="p-5"><img class="img-fluid rounded-circle" src="{{ recipe.image }}" alt="..." /></a>
                     </div>
                     <div class="col-lg-6 order-lg-1">
                         <div class="p-5">
@@ -59,7 +44,7 @@
         </section>
         {% endif %}
         {% endfor %}
-    {% comment %} <script>
+     <script>
         function debounce(func, wait = 20, immediate = true) {
             var timeout;
             return function() {
@@ -88,11 +73,10 @@
               sliderImage.classList.add('active');
             } else {
               sliderImage.classList.remove('active');
-        
             }
           });
         }
         
         window.addEventListener('scroll', debounce(checkSlide));
-    </script> {% endcomment %}
+    </script> 
 {% endblock %}

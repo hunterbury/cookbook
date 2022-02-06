@@ -72,6 +72,12 @@ nav {
           transform: translateX(0%) scale(1);
 }
 
+.rounded-circle {
+  max-height: 500px;
+  min-width: 500px;
+  min-height: 500px;
+}
+
 .modal-footer {
   -webkit-box-pack: center;
       -ms-flex-pack: center;
@@ -138,17 +144,6 @@ nav {
   background-color: inherit;
 }
 
-.comment-section .commentBtn {
-  float: right;
-}
-
-/*
-
-The following rule will only run if your browser supports CSS grid.
-
-Remove or comment-out the code block below to see how the browser will fall-back to flexbox styling. 
-
-*/
 *, *:before, *:after {
   -webkit-box-sizing: inherit;
           box-sizing: inherit;
@@ -185,5 +180,32 @@ Remove or comment-out the code block below to see how the browser will fall-back
 
 .hit-voting {
   cursor: pointer;
+}
+
+.card-body a {
+  text-decoration: none;
+}
+
+.card-body a:hover {
+  text-decoration: underline;
+  -webkit-text-decoration-color: black;
+          text-decoration-color: black;
+}
+
+.card-title {
+  color: black;
+}
+
+.card-img-top {
+  max-height: 400px;
+}
+
+.blog-image {
+  min-width: 90%;
+  max-height: 600px;
+}
+
+.card-img-top-main {
+  width: 100%;
 }
 /*# sourceMappingURL=index.css.map */
