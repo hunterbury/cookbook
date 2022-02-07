@@ -31,7 +31,6 @@ def blog(request):
     filter = RecipeFilter(request.GET, queryset=Recipe.objects.all())
     recipes = filter.qs
 
-    # recipes = Recipe.objects.all().order_by('-date')
     paginator = Paginator(recipes, 15)
 
     page_number = request.GET.get('page')
@@ -53,26 +52,6 @@ def viewRecipe(request, slug):
     comment_form = CommentForm()
     new_comment = None
 
-    # if request.method == 'POST':
-    #     # A comment was posted
-    #     comment_form = CommentForm(data=request.POST)
-    #     if comment_form.is_valid():
-    #         # Create Comment object but don't save to database yet          
-    #         new_comment = comment_form.save(commit=False)
-    #         # Assign the current post to the comment
-    #         new_comment.recipe = recipe
-    #         # Save the comment to the database
-    #         new_comment.save()
-        
-    #     comments = recipe.comments.filter(active=True)
-
-    #     return render(request, 'recipes/view.html', {
-    #         "recipe": recipe,
-    #         "filter": filter,
-    #         'comments': comments,
-    #         'new_comment': new_comment,
-    #         'comment_form': comment_form
-    #     })
     return render(request, 'recipes/view.html', {
             "recipe": recipe,
             "filter": filter,
@@ -82,6 +61,7 @@ def viewRecipe(request, slug):
         })
 
 def createRecipe(request):
+    recipes = Recipe.objects.all()
     filter = RecipeFilter(request.GET, queryset=Recipe.objects.all())
 
     if request.method == "GET":
@@ -100,7 +80,6 @@ def createRecipe(request):
         if form.is_valid():
             form.save()
             recipe = form.cleaned_data.get("recipe")
-            request.session["recipes"] += [recipe]
             return redirect('/')
 
         else:    
@@ -153,11 +132,7 @@ def deleteRecipe(request, slug):
     comment_form = CommentForm()
     new_comment = None
 
-    if request.method == 'GET':
-        return render(request, "recipes/delete.html", {
-            "recipe": recipe,
-        })
-    elif request.method == 'POST':
+    if request.method == 'POST':
         form = RecipeForm(request.POST, instance=recipe)
         recipe.delete()
         
@@ -167,14 +142,10 @@ def createComment(request, slug):
     filter = RecipeFilter(request.GET, queryset=Recipe.objects.all())
     recipe = Recipe.objects.get(slug=slug)
     new_comment = None
-    # A comment was posted
     comment_form = CommentForm(data=request.POST)
     if comment_form.is_valid():
-        # Create Comment object but don't save to database yet          
         new_comment = comment_form.save(commit=False)
-        # Assign the current post to the comment
         new_comment.recipe = recipe
-        # Save the comment to the database
         new_comment.save()
     
     comments = recipe.comments.filter(active=True)
@@ -209,24 +180,6 @@ def demoLogin(request):
 def logout(request):
     return render(request, 'recipes/index.html', {})
 
-
-# def update(request, pk):
-#     filter = RecipeFilter(request.GET, queryset=Recipe.objects.all())
-#     recipe = Recipe.objects.get(id=pk)
-#     recipeForm = RecipeForm(instance=recipe)
-
-#     if request.method == "POST":
-#         form = RecipeForm(request.POST, instance=recipe)
-#         if form.is_valid():
-#             form.save()
-#             recipe = form.cleaned_data.get("recipe")
-#             request.session["recipes"] += [recipe]
-#             return redirect('/')
-
-#     return render(request, "recipes/add.html", {
-#         "form": form,
-#         "filter": filter
-#     })
 
 
 

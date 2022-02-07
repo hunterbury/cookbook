@@ -10,25 +10,12 @@
     <script src="{% static 'recipes/js/app.js' %}"></script>   
     <link rel="stylesheet" href="{% static 'recipes/css/index.css' %}">
 </head>
+    <h5 class="modal-title text-center">Are you sure you want to delete "{{recipe.title}}"?</h5>
 
-
-        {% comment %} <div class="modal-body">
-          <p>Modal body text goes here.</p>
-        </div> {% endcomment %}
-        <h5 class="modal-title text-center">Are you sure you want to delete "{{recipe.title}}"?</h5>
-
-        <div class="container modal-footer text-center">
-            <a href="{% url 'recipes:view' slug=recipe.slug %}"><button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button></a>
-            <form action="{% url 'recipes:delete' slug=recipe.slug %}" method="POST">
-                {% csrf_token %}
-                <input type="submit" name="Confirm" class="btn btn-primary">
-            </form>
-        </div>
-      
-{% comment %} <p>Are you sure you want to delete "{{recipe.title}}"?</p>
-
-<form action="{% url 'recipes:delete' pk=recipe.id %}" method="POST">
-    {% csrf_token %}
-    <input type="submit" name="Confirm" class="btn btn-primary">
-</form>
-<a href="{% url 'recipes:view' pk=recipe.id %}">Cancel</a> {% endcomment %}
+    <div class="container modal-footer text-center">
+        <a href="{% url 'recipes:view' slug=recipe.slug %}"><button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button></a>
+        <form action="{% url 'recipes:delete' slug=recipe.slug %}" method="POST">
+            {% csrf_token %}
+            <input type="submit" name="Confirm" class="btn btn-primary">
+        </form>
+    </div>

@@ -40,13 +40,6 @@
         {{ form.ingredients|as_crispy_field }}
         {{ form.instructions|as_crispy_field }}
 
-        {% comment %} <table>
-            {% for field in form %}
-                {% if field != "date" %}
-                <tr><td>{{ field }}</td></tr>
-                {% endif %}
-            {% endfor %}
-            </table> {% endcomment %}
         <button type="submit" class="btn btn-dark mt-2">Submit</button>
     </form>
   </div>

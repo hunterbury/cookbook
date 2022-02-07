@@ -8,75 +8,40 @@
         <h1 class="masthead-heading mb-0">COOKBOOK</h1>
         <h2 class="masthead-subheading mb-0">by Hunter Bury</h2>
     </div>
-        {% for recipe in recipes %}
-        {% if forloop.counter|divisibleby:2 %}
-        <section>
-            <div class="container px-5">
-                <div class="row gx-5 align-items-center">
-                    <div class="col-lg-6">
-                        <a href="{% url 'recipes:view' slug=recipe.slug %}" class="p-5"><img class="img-fluid rounded-circle" src="{{ recipe.image }}" alt="..." /></a>
-                    </div>
-                    <div class="col-lg-6">
-                        <div class="p-5">
-                            <h2 class="display-4">{{ recipe.title }}</h2>
-                            <p>{{ recipe.description }}</p>
-                        </div>
+    {% for recipe in recipes %}
+    {% if forloop.counter|divisibleby:2 %}
+    <section>
+        <div class="container px-5">
+            <div class="row gx-5 align-items-center">
+                <div class="col-lg-6">
+                    <a href="{% url 'recipes:view' slug=recipe.slug %}" class="p-3"><img class="img-fluid rounded-circle" src="{{ recipe.image }}" alt="..." /></a>
+                </div>
+                <div class="col-lg-6">
+                    <div class="p-5">
+                        <h2 class="display-4">{{ recipe.title }}</h2>
+                        <p>{{ recipe.description }}</p>
                     </div>
                 </div>
             </div>
-        </section>
-        
-        {% else %}
-        <section id="scroll">
-            <div class="container px-5">
-                <div class="row gx-5 align-items-center">
-                    <div class="col-lg-6 order-lg-2">
-                        <a href="{% url 'recipes:view' slug=recipe.slug %}" class="p-5"><img class="img-fluid rounded-circle" src="{{ recipe.image }}" alt="..." /></a>
-                    </div>
-                    <div class="col-lg-6 order-lg-1">
-                        <div class="p-5">
-                            <h2 class="display-4">{{ recipe.title }}</h2>
-                            <p>{{ recipe.description }}</p>
-                        </div>
+        </div>
+    </section>
+    
+    {% else %}
+    <section id="scroll">
+        <div class="container px-5">
+            <div class="row gx-5 align-items-center">
+                <div class="col-lg-6 order-lg-2">
+                    <a href="{% url 'recipes:view' slug=recipe.slug %}" class="p-3"><img class="img-fluid rounded-circle" src="{{ recipe.image }}" alt="..." /></a>
+                </div>
+                <div class="col-lg-6 order-lg-1">
+                    <div class="p-5">
+                        <h2 class="display-4">{{ recipe.title }}</h2>
+                        <p>{{ recipe.description }}</p>
                     </div>
                 </div>
             </div>
-        </section>
-        {% endif %}
-        {% endfor %}
-     <script>
-        function debounce(func, wait = 20, immediate = true) {
-            var timeout;
-            return function() {
-              var context = this, args = arguments;
-              var later = function() {
-                timeout = null;
-                if (!immediate) func.apply(context, args);
-              };
-              var callNow = immediate && !timeout;
-              clearTimeout(timeout);
-              timeout = setTimeout(later, wait);
-              if (callNow) func.apply(context, args);
-            };
-        };
-        
-        const sliderImages = document.querySelectorAll('.slide-in', );
-        function checkSlide(e) {
-          sliderImages.forEach(sliderImage => {
-            //halfway through image
-            const slideInAt = (window.scrollY + window.innerHeight) - sliderImage.height / 2;
-            //bottom of image
-            const imageBottom = sliderImage.offsetTop + sliderImage.height;
-            const isHalfShown = slideInAt > sliderImage.offsetTop;
-            const isNotScrolledPast = window.scrollY < imageBottom;
-            if(isHalfShown && isNotScrolledPast) {
-              sliderImage.classList.add('active');
-            } else {
-              sliderImage.classList.remove('active');
-            }
-          });
-        }
-        
-        window.addEventListener('scroll', debounce(checkSlide));
-    </script> 
+        </div>
+    </section>
+    {% endif %}
+    {% endfor %}
 {% endblock %}

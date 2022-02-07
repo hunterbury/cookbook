@@ -5,75 +5,36 @@
 <div class="container mt-3">
     <h2 class="text-center py-3">RECIPE BLOG</h2>
   <div class="row">
-      <!-- Blog entries-->
       <div class="col-lg-8">
         {% for recipe in page_obj %}
         {% if page_obj is None %}
             <h2>No recipes found</h2>
         {% else %}
         {% if forloop.first %}
-          <!-- Featured blog post-->
           <div class="card mb-4">
               <a href="{% url 'recipes:view' slug=recipe.slug %}"><img class="card-img-top-main" src="{{ recipe.image }}" alt="..." /></a>
               <div class="card-body">
                   <div class="small text-muted">{{ recipe.date }}</div>
                   <a href="{% url 'recipes:view' slug=recipe.slug %}"><h2 class="card-title">{{ recipe.title}}</h2></a>
                   <p class="card-text">{{ recipe.description}}</p>
-                  {% comment %} <a class="btn btn-dark" href="{% url 'recipes:view' slug=recipe.slug %}">View recipe →</a> {% endcomment %}
               </div>
           </div>
-          <!-- Nested row for non-featured blog posts-->
           <div class="row">
             {% else %}
               <div class="col-lg-6 d-flex align-items-stretch">
-                  <!-- Blog post-->
                   <div class="card mb-4">
                       <a href="{% url 'recipes:view' slug=recipe.slug %}"><img class="card-img-top" src="{{ recipe.image }}" alt="..." /></a>
                       <div class="card-body d-flex flex-column">
                           <div class="small text-muted">{{ recipe.date }}</div>
                           <a href="{% url 'recipes:view' slug=recipe.slug %}"><h2 class="card-title h4">{{ recipe.title}}</h2></a>
                           <p class="card-text">{{ recipe.description}}</p>
-                          {% comment %} <a class="btn btn-dark mt-auto" href="{% url 'recipes:view' slug=recipe.slug %}">View recipe →</a> {% endcomment %}
                       </div>
                   </div>
               </div>
             {% endif %}
             {% endif %}
             {% endfor %}
-                  <!-- Blog post-->
-                  {% comment %} <div class="card mb-4">
-                      <a href="#!"><img class="card-img-top" src="https://dummyimage.com/700x350/dee2e6/6c757d.jpg" alt="..." /></a>
-                      <div class="card-body">
-                          <div class="small text-muted">January 1, 2021</div>
-                          <h2 class="card-title h4">Post Title</h2>
-                          <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reiciendis aliquid atque, nulla.</p>
-                          <a class="btn btn-primary" href="#!">Read more →</a>
-                      </div>
-                  </div> {% endcomment %}
-              {% comment %} <div class="col-lg-6">
-                  <!-- Blog post-->
-                  <div class="card mb-4">
-                      <a href="#!"><img class="card-img-top" src="https://dummyimage.com/700x350/dee2e6/6c757d.jpg" alt="..." /></a>
-                      <div class="card-body">
-                          <div class="small text-muted">January 1, 2021</div>
-                          <h2 class="card-title h4">Post Title</h2>
-                          <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reiciendis aliquid atque, nulla.</p>
-                          <a class="btn btn-primary" href="#!">Read more →</a>
-                      </div>
-                  </div>
-                  <!-- Blog post-->
-                  <div class="card mb-4">
-                      <a href="#!"><img class="card-img-top" src="https://dummyimage.com/700x350/dee2e6/6c757d.jpg" alt="..." /></a>
-                      <div class="card-body">
-                          <div class="small text-muted">January 1, 2021</div>
-                          <h2 class="card-title h4">Post Title</h2>
-                          <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reiciendis aliquid atque, nulla? Quos cum ex quis soluta, a laboriosam.</p>
-                          <a class="btn btn-primary" href="#!">Read more →</a>
-                      </div>
-                  </div>
-              </div> {% endcomment %}
           </div>
-          <!-- Pagination-->
           <nav aria-label="Page navigation example">
             <ul class="pagination justify-content-center">
                 {% if page_obj.has_previous %}
@@ -81,9 +42,6 @@
                         <a class="page-link" href="?page={{ page_obj.previous_page_number }}" tabindex="-1">Previous</a>
                     </li>
                 {% endif %}
-                {% comment %} <li class="page-item"><a class="page-link" href="?page=1">1</a></li>
-                <li class="page-item"><a class="page-link" href="?page=2">2</a></li>
-                <li class="page-item"><a class="page-link" href="?page=3">3</a></li>  {% endcomment %}
                 {% if page_obj.has_next %}
                     <li class="page-item">
                         <a class="page-link" href="?page={{ page_obj.next_page_number }}">Next</a>
@@ -92,22 +50,8 @@
             </ul>
           </nav> 
           
-          {% comment %} <nav aria-label="Pagination">
-              <hr class="my-0" />
-              <ul class="pagination justify-content-center my-4">
-                  <li class="page-item disabled"><a class="page-link" href="#" tabindex="-1" aria-disabled="true">Newer</a></li>
-                  <li class="page-item active" aria-current="page"><a class="page-link" href="#!">1</a></li>
-                  <li class="page-item"><a class="page-link" href="#!">2</a></li>
-                  <li class="page-item"><a class="page-link" href="#!">3</a></li>
-                  <li class="page-item disabled"><a class="page-link" href="#!">...</a></li>
-                  <li class="page-item"><a class="page-link" href="#!">15</a></li>
-                  <li class="page-item"><a class="page-link" href="#!">Older</a></li>
-              </ul>
-          </nav> {% endcomment %}
       </div>
-      <!-- Side widgets-->
       <div class="col-lg-4">
-          <!-- Search widget-->
           <div class="card mb-4">
               <div class="card-header">Search</div>
               <div class="card-body py-2">
@@ -119,7 +63,6 @@
                   </div>
               </div>
           </div>
-          <!-- Categories widget-->
           <div class="card mb-4">
               <div class="card-header">Categories</div>
               <div class="card-body">

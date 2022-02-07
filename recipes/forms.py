@@ -20,17 +20,3 @@ class CommentForm(forms.ModelForm):
     class Meta:
         model = Comment
         fields = ('name', 'comment',)
-
-# class IngredientForm(forms.ModelForm):
-#     class Meta:
-#         model = Ingredient
-#         exclude = ('recipe',)
-
-# IngredientFormSet = forms.inlineformset_factory(Recipe, Ingredient, form=IngredientForm)
-
-# class InstructionForm(forms.ModelForm):
-#     class Meta:
-#         model = Instruction
-#         exclude = ('recipe',)
-
-# InstructionFormSet = forms.inlineformset_factory(Recipe, Instruction, form=InstructionForm)
