@@ -1,7 +1,7 @@
 # Cookbook 
 
 
-Cookbook is a recipe blog with CRUD functionality. The back-end uses Django Rest Framework.  
+Cookbook is a full-stack web app that allows users to create, read, update, and delete recipe blog posts. I built a RESTful API that serves data to a multi-page front-end styled with Sass and Bootstrap. The back-end utilizes custom slug URLs, and Django serializers, models, filters, and forms.
 ## Tech Stack
 
 **Client:** HTML, JavaScript, Sass, Bootstrap
@@ -14,6 +14,7 @@ Cookbook is a recipe blog with CRUD functionality. The back-end uses Django Rest
 - User authentication
 - CRUD functionality
 - REST API
+- Slug URLs
 - Django models, forms, and filters
 - Pagination
 
@@ -21,11 +22,14 @@ Cookbook is a recipe blog with CRUD functionality. The back-end uses Django Rest
 
 ## Screenshots
 
-![App Screenshot](https://via.placeholder.com/468x300?text=App+Screenshot+Here)
+![App Screenshot](cookbook/assets/cookbook-login.png)
+![App Screenshot](cookbook/assets/cookbook-home.png)
+![App Screenshot](cookbook/assets/cookbook-blog.png)
+![App Screenshot](cookbook/assets/cookbook-post.png)
+
 
 
 ## Demo
 
-Insert gif or link to demo
-
+https://hunterbury-cookbook.herokuapp.com/
 
