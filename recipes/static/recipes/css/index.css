@@ -78,6 +78,13 @@ nav {
   min-height: 500px;
 }
 
+@media (max-width: 600px) {
+  .rounded-circle {
+    max-width: 100vw;
+    min-width: auto;
+  }
+}
+
 .modal-footer {
   -webkit-box-pack: center;
       -ms-flex-pack: center;
